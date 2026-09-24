@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Thread from '../components/Thread.astro';
+import { Image } from 'astro:assets';
+import audreyPhoto from '../assets/audrey-klein.png';
+---
+
+<Layout
+  title="Accueil"
+  description="Fil Rouge Éditions — biographe personnelle et familiale. Récits de vie, mémoires et biographies familiales, écrits avec passion."
+>
+  <section class="hero">
+    <div class="hero__thread">
+      <Thread variant="c" color="var(--accent-accueil)" />
+    </div>
+
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <h1>Fil Rouge Éditions</h1>
+        <p class="hero__subtitle">Biographe personnelle &amp; familiale</p>
+        <p class="hero__tagline">« Faites de votre vie un roman ! »</p>
+        <p class="hero__promesse">
+          Récits de vie, mémoires, roman familial ou destin personnel : je mets en mots vos histoires.
+        </p>
+        <a class="btn btn-primary" href="/contact">Parlons de votre histoire</a>
+      </div>
+
+      <div class="hero__photo">
+        <Image
+          src={audreyPhoto}
+          alt="Audrey Klein, biographe, devant sa bibliothèque"
+          width={900}
+          height={1125}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    --section-color: var(--accent-accueil);
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-6) 0;
+  }
+
+  .hero h1 {
+    /* Nom du site, pas un titre de rubrique : reste en encre. */
+    color: var(--color-ink);
+  }
+
+  .hero__grid {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__text {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-sans-alt);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 300;
+    color: var(--color-ink);
+  }
+
+  .hero__tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--accent-accueil);
+  }
+
+  .hero__promesse {
+    font-size: 1.05rem;
+    color: var(--color-ink-muted);
+    max-width: 460px;
+    line-height: 1.65;
+  }
+
+  .hero__photo {
+    flex: 1;
+    min-width: 280px;
+    max-width: 560px;
+  }
+
+  .hero__photo :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+
+  .hero__thread {
+    position: absolute;
+    inset: 10px 0;
+    opacity: 0.6;
+    transform: scaleX(-1);
+    z-index: 0;
+  }
+
+</style>

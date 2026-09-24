@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Thread from '../components/Thread.astro';
+import InstagramIcon from '../components/InstagramIcon.astro';
+import InstagramCarousel from '../components/InstagramCarousel.astro';
+import { siteConfig } from '../data/config';
+import { thematiques } from '../data/livres';
+
+const instagramUrl = siteConfig.instagramHandle
+  ? `https://instagram.com/${siteConfig.instagramHandle.replace('@', '')}`
+  : undefined;
+---
+
+<Layout
+  title="Books'nJoy"
+  description="Critiques littéraires et conseils de lecture d'Audrey Klein, sur Books'nJoy."
+>
+  <div class="page-thread-wrap">
+    <div class="page-thread">
+      <Thread variant="a" color="var(--accent-critiques)" />
+    </div>
+
+    <section class="section booksnjoy-intro">
+      <div class="container">
+        <h1>Books'nJoy</h1>
+      </div>
+    </section>
+
+    <section class="section critiques">
+      <div class="container critiques__content">
+        <h2>Critiques littéraires</h2>
+
+        <p class="critiques__text">
+          Je suis intimement convaincue que le roman a ce pouvoir formidable et puissant, par le
+          biais des épreuves vécues par ses personnages, de nous offrir des pistes de réflexion à
+          même de nous aider à surmonter nos propres défis ou à trouver notre voie. D'où la
+          dimension thérapeutique qui découle de l'acte de lire. Le livre n'est pas un pansement,
+          mais un outil permettant de se confronter à l'altérité, et donc de vivre d'autres vies que
+          la sienne. Les textes sont des outils d'interprétation de notre expérience personnelle et
+          contribuent à élargir, approfondir et éclairer notre lecture du monde, ainsi qu'à
+          embrasser ses différentes facettes. Cette vision, je l'ai forgée pendant mes quatre années
+          chez Gallimard, ainsi que depuis huit ans que je tiens ce blog et que j'anime mon compte
+          Instagram.
+        </p>
+
+        <div class="critiques__ctas">
+          <a
+            class="btn btn-primary"
+            href={siteConfig.booksnjoyChroniquesUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Lire les chroniques sur Books'nJoy
+          </a>
+          {instagramUrl && <span class="critiques__or">ou</span>}
+          {instagramUrl && (
+            <a class="btn btn-secondary critiques__instagram-btn" href={instagramUrl} target="_blank" rel="noopener noreferrer">
+              <InstagramIcon size={20} />
+              Mon Instagram
+            </a>
+          )}
+        </div>
+
+        <div class="critiques__feed">
+          <InstagramCarousel hideHeader />
+        </div>
+      </div>
+    </section>
+
+    <section class="section conseils">
+      <div class="container">
+        <h2>Conseils de lecture</h2>
+
+        <div class="conseils__grid">
+          {thematiques.map((theme) => (
+            <div class="card conseils__card">
+              <h3>{theme.titre}</h3>
+              <p class="conseils__empty">Sélection à venir.</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page-thread-wrap {
+    --section-color: var(--accent-critiques);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-thread {
+    position: absolute;
+    inset: 10px 0;
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .booksnjoy-intro {
+    padding-bottom: 0;
+  }
+
+  .critiques,
+  .conseils,
+  .booksnjoy-intro {
+    position: relative;
+  }
+
+  .critiques__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    max-width: 680px;
+  }
+
+  .critiques__text {
+    color: var(--color-ink-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .critiques__ctas {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .critiques__or {
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .critiques__instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .critiques__feed {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .conseils h2 {
+    position: relative;
+    z-index: 1;
+    margin-bottom: var(--space-4);
+  }
+
+  .conseils__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .conseils__card {
+    display: flex;
+    flex-direction: column;
+    min-height: 140px;
+  }
+
+  .conseils__empty {
+    margin-top: 10px;
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+  }
+</style>

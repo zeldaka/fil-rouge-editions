@@ -1,0 +1,273 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Thread from '../components/Thread.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import InstagramCarousel from '../components/InstagramCarousel.astro';
+import { siteConfig } from '../data/config';
+import { categories } from '../data/categories';
+
+// Rendu à la demande : nécessaire pour lire le résultat du formulaire
+// (?envoye=1 / ?erreur=...) après redirection, et pour le flux Instagram en direct.
+export const prerender = false;
+
+const envoye = Astro.url.searchParams.get('envoye') === '1';
+const erreur = Astro.url.searchParams.get('erreur');
+---
+
+<Layout
+  title="Contact"
+  description="Un premier échange pour parler de votre projet de biographie, récit de vie ou mémoires familiales."
+>
+  <section class="section contact">
+    <div class="contact__thread">
+      <Thread variant="b" color="var(--accent-contact)" />
+    </div>
+    <div class="container contact__grid">
+      <div class="contact__intro">
+        {/* Titre repris du brief (section 18, "titre possible"). */}
+        <h1>Vous avez une histoire à raconter ?</h1>
+        <p class="contact__subtext">
+          Un premier échange permet de parler de votre histoire, et me donnera une première idée
+          de la meilleure manière de vous accompagner pour donner vie à votre projet.
+        </p>
+
+        <a
+          class="btn btn-whatsapp"
+          href={siteConfig.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <WhatsAppIcon size={20} />
+          M'écrire sur WhatsApp
+        </a>
+
+        <div class="contact__coords">
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <a href={`tel:${siteConfig.phoneDisplay.replace(/\s/g, '')}`}>{siteConfig.phoneDisplay}</a>
+          <a href={`tel:${siteConfig.phoneIsraelDisplay.replace(/\s/g, '')}`}>{siteConfig.phoneIsraelDisplay}</a>
+        </div>
+
+        <div class="contact__instagram">
+          <InstagramCarousel />
+        </div>
+      </div>
+
+      <div class="contact__form-wrap">
+        {envoye && (
+          <p class="contact__banner contact__banner--ok" role="status">
+            Votre message a bien été envoyé, merci — réponse à venir rapidement.
+          </p>
+        )}
+        {erreur === 'champs' && (
+          <p class="contact__banner contact__banner--error" role="alert">
+            Merci de renseigner au moins votre nom et votre e-mail.
+          </p>
+        )}
+        {(erreur === 'envoi' || erreur === 'config') && (
+          <p class="contact__banner contact__banner--error" role="alert">
+            Le message n'a pas pu être envoyé pour le moment. Vous pouvez écrire directement à
+            {' '}<a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> ou sur WhatsApp.
+          </p>
+        )}
+
+        <form class="contact__form" method="POST" action="/api/contact">
+          {/* Piège à robots : champ caché pour les visiteurs, invisible aux
+              lecteurs d'écran (aria-hidden + tabindex=-1), que seuls les
+              robots de spam remplissent généralement. */}
+          <div class="contact__honeypot" aria-hidden="true">
+            <label for="site_web">Ne pas remplir ce champ</label>
+            <input id="site_web" name="site_web" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="contact__field">
+            <label for="prenomNom">Prénom et nom</label>
+            <input id="prenomNom" name="prenomNom" type="text" required />
+          </div>
+
+          <div class="contact__field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+
+          <div class="contact__field">
+            <label for="telephone">Téléphone</label>
+            <input id="telephone" name="telephone" type="tel" />
+          </div>
+
+          <div class="contact__field">
+            <label for="typeProjet">Type de projet</label>
+            <select id="typeProjet" name="typeProjet">
+              <option value="">Choisir (facultatif)</option>
+              {categories.map((cat) => (
+                <option value={cat.title}>{cat.title}</option>
+              ))}
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+
+          <div class="contact__field">
+            <label for="langue">Langue du projet</label>
+            <select id="langue" name="langue">
+              <option value="">Choisir (facultatif)</option>
+              <option value="Français">Français</option>
+              <option value="Anglais">Anglais</option>
+              <option value="Espagnol">Espagnol</option>
+            </select>
+          </div>
+
+          <div class="contact__field contact__field--full">
+            <label for="histoire">Quelques mots sur l'histoire à raconter</label>
+            <textarea id="histoire" name="histoire" rows="3"></textarea>
+          </div>
+
+          <div class="contact__field contact__field--full">
+            <label for="message">Message libre</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary contact__submit">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact {
+    --section-color: var(--accent-contact);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact h1 {
+    color: var(--section-color);
+  }
+
+  .contact__thread {
+    position: absolute;
+    inset: 10px 0;
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .contact__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-5);
+  }
+
+  .contact__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .contact__subtext {
+    color: var(--color-ink-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 400px;
+  }
+
+  .contact__coords {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.95rem;
+    margin-top: 8px;
+  }
+
+  .contact__coords a {
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .contact__coords a:hover {
+    text-decoration: underline;
+  }
+
+  .contact__instagram {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .contact__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .contact__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .contact__field--full {
+    grid-column: 1 / -1;
+  }
+
+  .contact__field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+  }
+
+  .contact__field input,
+  .contact__field select,
+  .contact__field textarea {
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--color-card-border);
+    background: var(--color-card-bg);
+    color: var(--color-ink);
+  }
+
+  .contact__field textarea {
+    resize: vertical;
+  }
+
+  .contact__submit {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .contact__banner {
+    grid-column: 1 / -1;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    margin: 0 0 18px;
+  }
+
+  .contact__banner--ok {
+    background: rgba(74, 217, 183, 0.18);
+  }
+
+  .contact__banner--error {
+    background: rgba(240, 71, 88, 0.12);
+  }
+
+  @media (max-width: 860px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact__form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+// Flux Instagram chargé côté client (fetch vers /api/instagram-feed) : la
+// page qui l'utilise reste statique et rapide, le flux se remplit après le
+// chargement. Tant qu'aucun jeton n'est configuré, affiche un message
+// d'attente plutôt qu'une erreur.
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import InstagramIcon from './InstagramIcon.astro';
+import { siteConfig } from '../data/config';
+
+interface Props {
+  compact?: boolean;
+  hideHeader?: boolean;
+}
+const { compact = false, hideHeader = false } = Astro.props;
+
+const profileUrl = siteConfig.instagramHandle
+  ? `https://instagram.com/${siteConfig.instagramHandle.replace('@', '')}`
+  : undefined;
+
+const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class:list={['instagram', { 'instagram--compact': compact }]} data-instagram-root id={uid}>
+  {!hideHeader && (
+    <div class="instagram__header">
+      <InstagramIcon size={compact ? 18 : 22} />
+      <p class="eyebrow">Instagram</p>
+      {profileUrl && (
+        <a class="instagram__handle" href={profileUrl} target="_blank" rel="noopener noreferrer">
+          {siteConfig.instagramHandle}
+        </a>
+      )}
+    </div>
+  )}
+
+  <div class="instagram__scroller" data-instagram-scroller>
+    <p class="instagram__empty" data-instagram-empty>Chargement des dernières publications…</p>
+  </div>
+</div>
+
+<style>
+  .instagram {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .instagram__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .instagram__handle {
+    font-size: 0.9rem;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+
+  .instagram__handle:hover {
+    text-decoration: underline;
+  }
+
+  .instagram__scroller {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+  }
+
+  .instagram__scroller :global(a) {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 160px;
+    border-radius: 14px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    display: block;
+  }
+
+  .instagram--compact .instagram__scroller :global(a) {
+    width: 96px;
+    height: 96px;
+    border-radius: 10px;
+  }
+
+  .instagram__scroller :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .instagram__empty {
+    color: var(--color-ink-soft);
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  async function initInstagramCarousels() {
+    const roots = document.querySelectorAll<HTMLElement>('[data-instagram-root]');
+    if (roots.length === 0) return;
+
+    let posts: Array<{ id: string; permalink: string; imageUrl: string; caption?: string }> | null = null;
+
+    try {
+      const res = await fetch('/api/instagram-feed');
+      if (res.ok) {
+        const data = await res.json();
+        posts = data.posts ?? [];
+      }
+    } catch {
+      posts = null;
+    }
+
+    roots.forEach((root) => {
+      const scroller = root.querySelector<HTMLElement>('[data-instagram-scroller]');
+      if (!scroller) return;
+
+      if (!posts || posts.length === 0) {
+        const empty = scroller.querySelector('[data-instagram-empty]');
+        if (empty) empty.textContent = 'Le flux Instagram apparaîtra ici une fois la connexion configurée.';
+        return;
+      }
+
+      scroller.innerHTML = '';
+      posts.forEach((post) => {
+        const a = document.createElement('a');
+        a.href = post.permalink;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label', post.caption ? post.caption.slice(0, 80) : 'Voir la publication sur Instagram');
+        const img = document.createElement('img');
+        img.src = post.imageUrl;
+        img.loading = 'lazy';
+        img.alt = '';
+        a.appendChild(img);
+        scroller.appendChild(a);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initInstagramCarousels);
+  } else {
+    initInstagramCarousels();
+  }
+</script>

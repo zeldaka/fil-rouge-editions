@@ -1,0 +1,127 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import InstagramCarousel from './InstagramCarousel.astro';
+import { siteConfig } from '../data/config';
+
+const nav = [
+  { href: '/a-propos', label: 'À propos' },
+  { href: '/vos-histoires', label: 'Vos histoires' },
+  { href: '/les-etapes', label: 'Les étapes' },
+  { href: '/critiques-litteraires', label: "Books'nJoy" },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <p class="site-footer__title">Fil Rouge Éditions</p>
+      <p class="site-footer__tagline">Biographe personnelle &amp; familiale</p>
+    </div>
+
+    <nav class="site-footer__nav">
+      {nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="site-footer__contact">
+      <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      <a href={`tel:${siteConfig.phoneDisplay.replace(/\s/g, '')}`}>{siteConfig.phoneDisplay}</a>
+      <a class="site-footer__whatsapp" href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
+        <WhatsAppIcon size={20} />
+        M'écrire sur WhatsApp
+      </a>
+    </div>
+
+    <div class="site-footer__instagram">
+      <InstagramCarousel compact />
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-footer-bg);
+    color: #ffffff;
+    padding: var(--space-5) 0 var(--space-4);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.2fr;
+    gap: var(--space-4);
+  }
+
+  .site-footer__title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .site-footer__tagline {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .site-footer__nav a,
+  .site-footer__contact a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  .site-footer__nav a:hover,
+  .site-footer__contact a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .site-footer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .site-footer__whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-ink);
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  @media (max-width: 900px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+
+  /* Le carrousel Instagram est un composant à part (styles qui lui sont
+     propres) — on force ici son texte en blanc pour rester lisible sur
+     le fond vert du pied de page. */
+  .site-footer__instagram :global(.instagram__handle),
+  .site-footer__instagram :global(.instagram__empty) {
+    color: rgba(255, 255, 255, 0.8);
+  }
+</style>

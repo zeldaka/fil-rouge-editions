@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Thread from '../components/Thread.astro';
+import InstagramCarousel from '../components/InstagramCarousel.astro';
+import { Image } from 'astro:assets';
+import { influences } from '../data/influences';
+
+// Texte intégral fourni par Audrey (brief, section 12) — ne pas reformuler
+// le fond. Seule la mise en forme (gras/italique) a été ajoutée sur
+// consigne explicite d'Audrey, et Karl Ove Knausgård a été remplacé par
+// John Steinbeck (À l'Est d'Éden), également sur sa consigne explicite.
+---
+
+<Layout
+  title="À propos"
+  description="À propos d'Audrey Klein, biographe personnelle et familiale : son parcours et ses influences littéraires."
+>
+  <div class="page-thread-wrap">
+    <div class="page-thread">
+      <Thread variant="a" color="var(--accent-a-propos)" />
+    </div>
+
+    <section class="section about">
+      <div class="container about__grid">
+        <h1>À propos</h1>
+        <div class="about__text">
+          <p>
+            Bercée par les mots, la littérature et la transmission des histoires de vie, j’ai décidé
+            de mettre ma passion au service d’une mission et ma plume au service des familles.
+          </p>
+          <p>
+            Après un parcours dans l'édition (<strong class="influence-name">Gallimard</strong>,
+            <strong class="influence-name">Zulma</strong>) et la critique littéraire
+            (<strong class="influence-name">Books'nJoy</strong>),
+            j'accompagne aujourd’hui celles et ceux qui souhaitent préserver leur mémoire familiale et
+            transmettre leur histoire aux générations futures.
+          </p>
+          <p>
+            C’est après avoir lu des auteurs comme <strong class="influence-name">Daniel Mendelsohn</strong>
+            (<em>Les Disparus</em>), <strong class="influence-name">Romain Gary</strong>,
+            <strong class="influence-name">Stefan Zweig</strong>,
+            <strong class="influence-name">Isaac Bashevis Singer</strong>,
+            <strong class="influence-name">Charles Lewinsky</strong> (<em>Les Melnitz</em>),
+            <strong class="influence-name">Anne Berest</strong> (<em>La carte postale</em>),
+            <strong class="influence-name">Israël Joshua Singer</strong>,
+            <strong class="influence-name">John Steinbeck</strong> (<em>À l'Est d'Éden</em>), et tant
+            d’autres écrivains que j’ai saisi l’importance de conserver une trace écrite des histoires
+            et des modes de vie passés.
+          </p>
+          <p>
+            La lecture d’autres textes m’a convaincue de la force que des expériences individuelles
+            narrées peuvent exercer sur celui qui le lit. <em>Une vie bouleversée</em> d'<strong class="influence-name">Etty Hillesum</strong>,
+            <em>Une éducation</em> de <strong class="influence-name">Tara Westover</strong> ou <em>Martin Eden</em> de <strong class="influence-name">Jack London</strong>, qui
+            tiennent autant du témoignage que du roman d’apprentissage, ont cet effet. Le lecteur
+            expérimente l’altérité, entre en empathie et éprouve par ricochets des changements
+            concrets en se mettant à la place du narrateur.
+          </p>
+          <p>Ainsi, votre histoire une fois racontée influera sur celui qui la lira.</p>
+          <p>
+            L’écrit dispose d’outils que d’autres arts n’ont pas. Il résiste au temps. Il est
+            également vecteur de tolérance et de connaissance.
+          </p>
+          <p>
+            En écrivant votre histoire, vous ouvrez une porte vers le savoir aux prochaines
+            générations et sans le savoir peut-être les guidez-vous dans leurs choix.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section influences">
+      <div class="container influences__inner">
+        <h2 class="influences__title">Les livres qui m'ont donné envie de raconter des
+         histoires</h2>
+        <div class="influences__grid">
+          {influences.map((item) => (
+            <div class="influences__card">
+              <div class="influences__cover">
+                <Image src={item.image} alt={`Couverture de ${item.oeuvre}, ${item.auteur}`} width={300} height={450} />
+              </div>
+              <p class="influences__caption">
+                <em>{item.oeuvre}</em>
+                <span class="influences__auteur">{item.auteur}</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section instagram-section">
+      <div class="container instagram-section__inner">
+        <InstagramCarousel />
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page-thread-wrap {
+    --section-color: var(--accent-a-propos);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-thread {
+    position: absolute;
+    top: -140px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .about h1 {
+    color: var(--section-color);
+  }
+
+  .influence-name {
+    color: var(--section-color);
+    font-weight: 700;
+  }
+
+  .about__grid {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 700px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-ink);
+  }
+
+  .influences__inner,
+  .instagram-section__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .influences__title {
+    font-family: var(--font-sans-alt);
+    font-weight: 300;
+    margin-bottom: var(--space-4);
+  }
+
+  .influences__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 28px 20px;
+  }
+
+  .influences__card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .influences__cover {
+    aspect-ratio: 2 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-card-bg);
+    box-shadow: 0 10px 24px rgba(41, 38, 36, 0.16);
+  }
+
+  .influences__cover :global(img) {
+    width: 100%;
+    height: 100%;
+    /* "contain" : la couverture entière reste visible, jamais recadrée,
+       même si son format d'origine n'est pas exactement 2:3. */
+    object-fit: contain;
+    display: block;
+  }
+
+  .influences__caption {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--color-ink-muted);
+  }
+
+  .influences__caption em {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-ink);
+    font-size: 0.9rem;
+  }
+
+  .influences__auteur {
+    display: block;
+    margin-top: 2px;
+  }
+</style>

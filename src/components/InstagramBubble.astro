@@ -1,0 +1,45 @@
+---
+import InstagramIcon from './InstagramIcon.astro';
+import { siteConfig } from '../data/config';
+
+const profileUrl = siteConfig.instagramHandle
+  ? `https://instagram.com/${siteConfig.instagramHandle.replace('@', '')}`
+  : undefined;
+---
+
+{profileUrl && (
+  <a class="instagram-bubble" href={profileUrl} target="_blank" rel="noopener noreferrer" aria-label="Voir le profil Instagram">
+    <InstagramIcon size={28} />
+  </a>
+)}
+
+<style>
+  .instagram-bubble {
+    position: fixed;
+    right: 20px;
+    bottom: 88px;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(41, 38, 36, 0.18);
+    z-index: 50;
+    transition: transform 0.15s ease;
+  }
+
+  .instagram-bubble:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 640px) {
+    .instagram-bubble {
+      right: 16px;
+      bottom: 78px;
+      width: 46px;
+      height: 46px;
+    }
+  }
+</style>

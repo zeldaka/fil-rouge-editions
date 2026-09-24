@@ -1,0 +1,38 @@
+---
+// Surlignage manuscrit très léger derrière un mot — même langage graphique
+// que le fil, en miniature. À utiliser rarement (voir brief section 9).
+interface Props {
+  color?: string;
+}
+const { color = 'var(--accent-accueil)' } = Astro.props;
+---
+
+<span class="pen-underline">
+  <svg class="pen-underline__mark" viewBox="0 0 140 30" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      d="M4,20 C20,8 30,28 46,16 C60,6 70,26 84,15 C98,6 110,24 136,14"
+      stroke={color}
+      stroke-width="2.2"
+      fill="none"
+      vector-effect="non-scaling-stroke"
+    />
+  </svg>
+  <slot />
+</span>
+
+<style>
+  .pen-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .pen-underline__mark {
+    position: absolute;
+    left: -3%;
+    bottom: -0.32em;
+    width: 106%;
+    height: 0.5em;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+</style>

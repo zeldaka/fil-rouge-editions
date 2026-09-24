@@ -1,0 +1,142 @@
+---
+const nav = [
+  { href: '/a-propos', label: 'À propos', color: 'var(--accent-a-propos)' },
+  { href: '/vos-histoires', label: 'Vos histoires', color: 'var(--accent-vos-histoires)' },
+  { href: '/les-etapes', label: 'Les étapes', color: 'var(--accent-les-etapes)' },
+  { href: '/critiques-litteraires', label: "Books'nJoy", color: 'var(--accent-critiques)' },
+  { href: '/contact', label: 'Contact', color: 'var(--accent-contact)' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a href="/" class="site-header__brand">Fil Rouge Éditions</a>
+
+    <button class="site-header__toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="visually-hidden">Ouvrir le menu</span>
+      <span class="site-header__toggle-bar"></span>
+      <span class="site-header__toggle-bar"></span>
+      <span class="site-header__toggle-bar"></span>
+    </button>
+
+    <nav id="site-nav" class="site-header__nav">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class:list={['site-header__link', { 'is-active': currentPath === item.href }]}
+          style={`--link-color: ${item.color};`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-card-border);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 18px 24px;
+    gap: clamp(32px, 6vw, 64px);
+  }
+
+  .site-header__brand {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .site-header__link {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--color-ink);
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .site-header__link.is-active,
+  .site-header__link:hover {
+    border-bottom-color: var(--link-color, var(--accent-accueil));
+  }
+
+  .site-header__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .site-header__toggle-bar {
+    width: 22px;
+    height: 2px;
+    background: var(--color-ink);
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .site-header__toggle {
+      display: flex;
+    }
+
+    .site-header__nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-card-border);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 12px 24px 20px;
+    }
+
+    .site-header__nav.is-open {
+      display: flex;
+    }
+
+    .site-header__link {
+      padding: 10px 0;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { siteConfig } from '../data/config';
+---
+
+<a
+  class="whatsapp-bubble"
+  href={siteConfig.whatsappUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Écrire sur WhatsApp"
+>
+  <WhatsAppIcon size={30} />
+</a>
+
+<style>
+  .whatsapp-bubble {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 58px;
+    height: 58px;
+    border-radius: 999px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(41, 38, 36, 0.18);
+    z-index: 50;
+    transition: transform 0.15s ease;
+  }
+
+  .whatsapp-bubble:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 640px) {
+    .whatsapp-bubble {
+      right: 16px;
+      bottom: 16px;
+      width: 52px;
+      height: 52px;
+    }
+  }
+</style>

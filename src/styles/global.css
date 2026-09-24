@@ -1,0 +1,194 @@
+/* ============================================================
+   Fil Rouge Éditions — design tokens
+   Police et couleurs : proposition à valider avec Audrey.
+   Typo pressentie : Lora (titres) + Quicksand (texte courant),
+   à confirmer / remplacer si les polices exactes de la
+   référence Books'nJoy sont connues.
+   ============================================================ */
+
+:root {
+  /* Fond : ivoire uniquement, jamais d'autre couleur de fond de section */
+  --color-bg: #fdf9f0;
+
+  /* Encre : noir chaud, pas de bleu, pas de noir pur */
+  --color-ink: #292624;
+  --color-ink-muted: #6b655e;
+  --color-ink-soft: #8a8478;
+
+  /* Cartes : léger contraste par bordure/ombre, jamais par un fond coloré */
+  --color-card-bg: #fffdf8;
+  --color-card-border: rgba(41, 38, 36, 0.1);
+
+  /* Couleur d'accent par rubrique — reprise par le ruban, le H1 et le
+     bouton de la page (voir --section-color posé par chaque page) */
+  --accent-accueil: #ea5769;
+  --accent-a-propos: #ac1885;
+  --accent-vos-histoires: #a594e2;
+  --accent-les-etapes: #4ad9b7;
+  --accent-critiques: #f04758;
+  --accent-conseils: #f2dc7a;
+  --accent-contact: #06c2bb;
+
+  /* Palette pastel complémentaire (fichier Couleurs fourni) — disponible
+     pour des accents ponctuels au-delà des couleurs de rubrique */
+  --color-rose-soft: #edb8cb;
+  --color-rose-pale: #f9bad6;
+  --color-vert-vif: #1fc493;
+
+  /* Couleur des boutons d'action par défaut si aucune --section-color
+     n'est posée sur le conteneur de la page */
+  --color-cta: #ea5769;
+
+  /* Fond du pied de page — même vert, éclairci */
+  --color-footer-bg: #4cd0a9;
+
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Quicksand', system-ui, sans-serif;
+  --font-sans-alt: 'Poppins', system-ui, sans-serif;
+
+  --container-width: 1160px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 96px;
+
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--color-ink);
+}
+
+/* Les titres de rubrique (H1) et de section (H2) reprennent systématiquement
+   la couleur de la rubrique, posée par chaque page via --section-color.
+   Les H3 (titres de carte) restent en encre pour garder une hiérarchie. */
+h1, h2 {
+  color: var(--section-color, var(--color-ink));
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+h3 { font-size: 1.3rem; }
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.section {
+  padding: var(--space-6) 0;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--space-5) 0;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 15px 30px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.btn-primary {
+  /* Reprend la couleur de la rubrique (--section-color, posée sur le
+     conteneur de section) — sinon retombe sur le corail par défaut. */
+  background: var(--section-color, var(--color-cta));
+  color: var(--color-bg);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+}
+
+.card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

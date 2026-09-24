@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Thread from '../components/Thread.astro';
+import { etapes } from '../data/etapes';
+---
+
+<Layout
+  title="Les étapes"
+  description="Les huit étapes de l'accompagnement, de la conception éditoriale à l'impression du livre."
+>
+  <section class="section etapes">
+    <div class="etapes__thread">
+      <Thread variant="b" color="var(--accent-les-etapes)" />
+    </div>
+    <div class="container etapes__layout">
+      <h1>Les étapes</h1>
+
+      <ol class="etapes__list">
+        {etapes.map((etape) => (
+          <li class="etapes__item">
+            <span class="etapes__numero">{etape.numero}</span>
+            <div>
+              <h3>{etape.titre}</h3>
+              <p>{etape.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .etapes {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .etapes__thread {
+    position: absolute;
+    inset: 10px 0;
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .etapes__layout {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .etapes__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 620px;
+  }
+
+  .etapes__item h3 {
+    margin-bottom: 6px;
+  }
+
+  .etapes__item p {
+    color: var(--color-ink-muted);
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .etapes__numero {
+    display: block;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--accent-les-etapes);
+    margin-bottom: 4px;
+  }
+
+</style>

@@ -1,0 +1,136 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppBubble from '../components/WhatsAppBubble.astro';
+import InstagramBubble from '../components/InstagramBubble.astro';
+import { getImage } from 'astro:assets';
+import audreyPhoto from '../assets/audrey-klein.png';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Image utilisée pour l'aperçu quand une page est partagée (réseaux
+// sociaux, WhatsApp, etc.) — format standard 1200×630.
+const ogImage = await getImage({ src: audreyPhoto, width: 1200, height: 630, format: 'jpg' });
+const ogImageURL = new URL(ogImage.src, Astro.site);
+
+// Données structurées (schema.org) : type "Person" — volontairement pas
+// "LocalBusiness"/"ProfessionalService", qui impliquerait une zone
+// géographique, contrairement au brief. Uniquement des informations
+// réelles, aucune inventée.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Audrey Klein',
+  jobTitle: 'Biographe personnelle & familiale',
+  url: new URL('/', Astro.site).toString(),
+  email: 'mailto:contact@filrouge-editions.com',
+  sameAs: ['https://instagram.com/booksnjoy'],
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title} · Fil Rouge Éditions</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fil Rouge Éditions" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={`${title} · Fil Rouge Éditions`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} · Fil Rouge Éditions`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppBubble />
+    <InstagramBubble />
+
+    <script>
+      // Le fil rouge se dessine très légèrement au scroll — effet discret,
+      // jamais spectaculaire, désactivé si l'utilisateur préfère moins
+      // d'animations. Sans JavaScript, le trait reste simplement visible.
+      function initHandThreads() {
+        const threads = document.querySelectorAll<HTMLElement>('.hand-thread');
+        if (threads.length === 0) return;
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+        // Le ruban est une forme pleine (fill), pas un trait : on le révèle
+        // du haut vers le bas avec un clip-path plutôt qu'un stroke-dashoffset
+        // (qui ne s'applique qu'à un contour dessiné, pas à un remplissage).
+        //
+        // On observe le PARENT (jamais clippé), pas le SVG lui-même : un
+        // élément déjà réduit à 0 par clip-path est mesuré par
+        // IntersectionObserver comme non-intersectant, ce qui bloquerait
+        // la révélation avant même qu'elle commence.
+        threads.forEach((thread) => {
+          thread.style.clipPath = 'inset(0 0 100% 0)';
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const parent = entry.target as HTMLElement;
+                const target = parent.querySelector<HTMLElement>('.hand-thread');
+                if (target) {
+                  target.style.transition = 'clip-path 2.6s ease-out';
+                  target.style.clipPath = 'inset(0 0 0% 0)';
+                }
+                observer.unobserve(parent);
+              }
+            });
+          },
+          { threshold: 0.01 }
+        );
+
+        threads.forEach((thread) => {
+          const parent = thread.parentElement;
+          if (parent) observer.observe(parent);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHandThreads);
+      } else {
+        initHandThreads();
+      }
+    </script>
+  </body>
+</html>
