@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://filrouge-editions.com/sitemap.xml
+Sitemap: https://filrouge-editions.com/sitemap-index.xml
