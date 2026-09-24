@@ -12,5 +12,5 @@ export const siteConfig = {
   booksnjoyChroniquesUrl: 'https://www.booksnjoy.com/category/chroniques-litteraires/',
 
   // @identifiant Instagram à afficher (À propos + Contact).
-  instagramHandle: '@booksnjoy',
+  instagramHandle: '@books_njoy',
 };
