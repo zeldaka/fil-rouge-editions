@@ -27,42 +27,44 @@ const instagramUrl = siteConfig.instagramHandle
     </section>
 
     <section class="section critiques">
-      <div class="container critiques__content">
-        <h2>Critiques littéraires</h2>
+      <div class="container">
+        <div class="critiques__content">
+          <h2>Critiques littéraires</h2>
 
-        <p class="critiques__text">
-          Je suis intimement convaincue que le roman a ce pouvoir formidable et puissant, par le
-          biais des épreuves vécues par ses personnages, de nous offrir des pistes de réflexion à
-          même de nous aider à surmonter nos propres défis ou à trouver notre voie. D'où la
-          dimension thérapeutique qui découle de l'acte de lire. Le livre n'est pas un pansement,
-          mais un outil permettant de se confronter à l'altérité, et donc de vivre d'autres vies que
-          la sienne. Les textes sont des outils d'interprétation de notre expérience personnelle et
-          contribuent à élargir, approfondir et éclairer notre lecture du monde, ainsi qu'à
-          embrasser ses différentes facettes. Cette vision, je l'ai forgée pendant mes quatre années
-          chez Gallimard, ainsi que depuis huit ans que je tiens ce blog et que j'anime mon compte
-          Instagram.
-        </p>
+          <p class="critiques__text">
+            Je suis intimement convaincue que le roman a ce pouvoir formidable et puissant, par le
+            biais des épreuves vécues par ses personnages, de nous offrir des pistes de réflexion à
+            même de nous aider à surmonter nos propres défis ou à trouver notre voie. D'où la
+            dimension thérapeutique qui découle de l'acte de lire. Le livre n'est pas un pansement,
+            mais un outil permettant de se confronter à l'altérité, et donc de vivre d'autres vies que
+            la sienne. Les textes sont des outils d'interprétation de notre expérience personnelle et
+            contribuent à élargir, approfondir et éclairer notre lecture du monde, ainsi qu'à
+            embrasser ses différentes facettes. Cette vision, je l'ai forgée pendant mes quatre années
+            chez Gallimard, ainsi que depuis huit ans que je tiens ce blog et que j'anime mon compte
+            Instagram.
+          </p>
 
-        <div class="critiques__ctas">
-          <a
-            class="btn btn-primary"
-            href={siteConfig.booksnjoyChroniquesUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Lire les chroniques sur Books'nJoy
-          </a>
-          {instagramUrl && <span class="critiques__or">ou</span>}
-          {instagramUrl && (
-            <a class="btn btn-secondary critiques__instagram-btn" href={instagramUrl} target="_blank" rel="noopener noreferrer">
-              <InstagramIcon size={20} />
-              Mon Instagram
+          <div class="critiques__ctas">
+            <a
+              class="btn btn-primary"
+              href={siteConfig.booksnjoyChroniquesUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Lire les chroniques sur Books'nJoy
             </a>
-          )}
+            {instagramUrl && <span class="critiques__or">ou</span>}
+            {instagramUrl && (
+              <a class="btn btn-secondary critiques__instagram-btn" href={instagramUrl} target="_blank" rel="noopener noreferrer">
+                <InstagramIcon size={20} />
+                Mon Instagram
+              </a>
+            )}
+          </div>
         </div>
 
         <div class="critiques__feed">
-          <InstagramCarousel hideHeader limit={4} />
+          <InstagramCarousel hideHeader limit={6} fill showMoreLink />
         </div>
       </div>
     </section>
@@ -111,6 +113,14 @@ const instagramUrl = siteConfig.instagramHandle
     position: relative;
   }
 
+  .critiques {
+    padding-bottom: var(--space-2);
+  }
+
+  .conseils {
+    padding-top: var(--space-4);
+  }
+
   .critiques__content {
     position: relative;
     z-index: 1;
@@ -146,8 +156,10 @@ const instagramUrl = siteConfig.instagramHandle
   }
 
   .critiques__feed {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    margin-top: 8px;
+    margin-top: var(--space-4);
   }
 
   .conseils h2 {

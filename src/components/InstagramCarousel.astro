@@ -11,9 +11,17 @@ interface Props {
   hideHeader?: boolean;
   limit?: number;
   showMoreLink?: boolean;
-  wrap?: boolean;
+  /** Bord à bord, largeur totale disponible, pas de défilement : le nombre
+   * de vignettes visibles s'adapte à la largeur de l'écran. */
+  fill?: boolean;
 }
-const { compact = false, hideHeader = false, limit = 8, showMoreLink = false, wrap = false } = Astro.props;
+const {
+  compact = false,
+  hideHeader = false,
+  limit = 8,
+  showMoreLink = false,
+  fill = false,
+} = Astro.props;
 
 const profileUrl = siteConfig.instagramHandle
   ? `https://instagram.com/${siteConfig.instagramHandle.replace('@', '')}`
@@ -23,11 +31,13 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
 <div
-  class:list={['instagram', { 'instagram--compact': compact, 'instagram--wrap': wrap }]}
+  class:list={['instagram', { 'instagram--compact': compact, 'instagram--fill': fill }]}
   data-instagram-root
   data-limit={limit}
   data-show-more={showMoreLink && profileUrl ? 'true' : 'false'}
   data-profile-url={profileUrl}
+  data-fill={fill ? 'true' : 'false'}
+  data-tile-target={compact ? 110 : 170}
   id={uid}
 >
   {!hideHeader && (
@@ -90,8 +100,8 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
   }
 
   .instagram--compact .instagram__scroller :global(a.instagram__tile) {
-    width: 96px;
-    height: 96px;
+    width: 110px;
+    height: 110px;
     border-radius: 10px;
   }
 
@@ -102,18 +112,18 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     display: block;
   }
 
-  /* Mode "wrap" (pied de page) : pas de défilement horizontal — les
-     vignettes passent à la ligne et tout ce qui dépasse la première rangée
-     est simplement masqué, pour n'afficher que des vignettes entières, en
-     nombre adapté à la largeur de l'écran. */
-  .instagram--wrap .instagram__scroller {
-    flex-wrap: wrap;
-    overflow: hidden;
-    max-height: 160px;
+  /* Mode "fill" : les vignettes se répartissent bord à bord sur toute la
+     largeur disponible, sans défilement — leur nombre est calculé côté
+     script en fonction de la largeur de l'écran (voir <script> plus bas). */
+  .instagram--fill .instagram__scroller {
+    overflow: visible;
   }
 
-  .instagram--wrap.instagram--compact .instagram__scroller {
-    max-height: 96px;
+  .instagram--fill .instagram__scroller :global(a.instagram__tile) {
+    flex: 1 1 0;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    height: auto;
   }
 
   .instagram__scroller :global(a.instagram__more) {
@@ -138,11 +148,19 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
   }
 
   .instagram--compact .instagram__scroller :global(a.instagram__more) {
-    width: 96px;
-    height: 96px;
+    width: 110px;
+    height: 110px;
     font-size: 0.75rem;
     padding: 8px;
     gap: 4px;
+  }
+
+  .instagram--fill .instagram__scroller :global(a.instagram__more) {
+    flex: 1 1 0;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border-radius: 14px;
   }
 
   .instagram__scroller :global(a.instagram__more:hover) {
@@ -156,6 +174,12 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
 </style>
 
 <script>
+  function computeFillCount(container: HTMLElement, targetTile: number, gap: number, max: number): number {
+    const width = container.getBoundingClientRect().width || targetTile * 3;
+    const count = Math.round((width + gap) / (targetTile + gap));
+    return Math.max(2, Math.min(max, count));
+  }
+
   async function initInstagramCarousels() {
     const roots = document.querySelectorAll<HTMLElement>('[data-instagram-root]');
     if (roots.length === 0) return;
@@ -182,35 +206,55 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
         return;
       }
 
-      const limit = Number(root.dataset.limit ?? '8') || 8;
+      const maxLimit = Number(root.dataset.limit ?? '8') || 8;
       const showMore = root.dataset.showMore === 'true';
       const profileUrl = root.dataset.profileUrl;
-      const visible = posts.slice(0, limit);
+      const isFill = root.dataset.fill === 'true';
+      const targetTile = Number(root.dataset.tileTarget ?? '170') || 170;
 
-      scroller.innerHTML = '';
-      visible.forEach((post) => {
-        const a = document.createElement('a');
-        a.href = post.permalink;
-        a.className = 'instagram__tile';
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.setAttribute('aria-label', post.caption ? post.caption.slice(0, 80) : 'Voir la publication sur Instagram');
-        const img = document.createElement('img');
-        img.src = post.imageUrl;
-        img.loading = 'lazy';
-        img.alt = '';
-        a.appendChild(img);
-        scroller.appendChild(a);
-      });
+      const render = () => {
+        let count = maxLimit;
+        if (isFill) {
+          count = computeFillCount(root, targetTile, 12, maxLimit);
+          if (showMore && profileUrl) count = Math.max(2, count - 1);
+        }
+        const visible = posts!.slice(0, count);
 
-      if (showMore && profileUrl) {
-        const more = document.createElement('a');
-        more.href = profileUrl;
-        more.className = 'instagram__more';
-        more.target = '_blank';
-        more.rel = 'noopener noreferrer';
-        more.textContent = 'Voir plus →';
-        scroller.appendChild(more);
+        scroller.innerHTML = '';
+        visible.forEach((post) => {
+          const a = document.createElement('a');
+          a.href = post.permalink;
+          a.className = 'instagram__tile';
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', post.caption ? post.caption.slice(0, 80) : 'Voir la publication sur Instagram');
+          const img = document.createElement('img');
+          img.src = post.imageUrl;
+          img.loading = 'lazy';
+          img.alt = '';
+          a.appendChild(img);
+          scroller.appendChild(a);
+        });
+
+        if (showMore && profileUrl) {
+          const more = document.createElement('a');
+          more.href = profileUrl;
+          more.className = 'instagram__more';
+          more.target = '_blank';
+          more.rel = 'noopener noreferrer';
+          more.textContent = 'Voir plus →';
+          scroller.appendChild(more);
+        }
+      };
+
+      render();
+
+      if (isFill) {
+        let resizeTimer: ReturnType<typeof setTimeout>;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(render, 150);
+        });
       }
     });
   }
