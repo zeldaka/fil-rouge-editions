@@ -1,7 +1,6 @@
-// Flux Instagram en direct — Instagram Graph API.
-// Nécessite un compte Instagram professionnel/créateur lié à une page
-// Facebook, une application sur developers.facebook.com, et un jeton
-// d'accès longue durée renouvelé périodiquement (voir README du site).
+// Flux Instagram en direct — Instagram API with Instagram Login (graph.instagram.com).
+// Nécessite un compte Instagram professionnel/créateur, une application sur
+// developers.facebook.com et un jeton d'accès (voir README du site).
 // Variables d'environnement : INSTAGRAM_ACCESS_TOKEN, INSTAGRAM_USER_ID.
 
 export interface InstagramPost {
@@ -27,7 +26,7 @@ export async function getInstagramPosts(limit = 8): Promise<InstagramPost[]> {
   }
 
   const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink';
-  const url = `https://graph.facebook.com/v19.0/${userId}/media?fields=${fields}&access_token=${token}&limit=${limit}`;
+  const url = `https://graph.instagram.com/v21.0/${userId}/media?fields=${fields}&access_token=${token}&limit=${limit}`;
 
   try {
     const res = await fetch(url);
