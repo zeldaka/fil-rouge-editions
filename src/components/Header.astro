@@ -1,11 +1,11 @@
 ---
-const nav = [
+const mainNav = [
   { href: '/a-propos', label: 'À propos', color: 'var(--accent-a-propos)' },
   { href: '/vos-histoires', label: 'Vos histoires', color: 'var(--accent-vos-histoires)' },
   { href: '/les-etapes', label: 'Les étapes', color: 'var(--accent-les-etapes)' },
   { href: '/critiques-litteraires', label: "Books'nJoy", color: 'var(--accent-critiques)' },
-  { href: '/contact', label: 'Contact', color: 'var(--accent-contact)' },
 ];
+const contactItem = { href: '/contact', label: 'Contact', color: 'var(--accent-contact)' };
 
 const currentPath = Astro.url.pathname;
 ---
@@ -22,15 +22,24 @@ const currentPath = Astro.url.pathname;
     </button>
 
     <nav id="site-nav" class="site-header__nav">
-      {nav.map((item) => (
-        <a
-          href={item.href}
-          class:list={['site-header__link', { 'is-active': currentPath === item.href }]}
-          style={`--link-color: ${item.color};`}
-        >
-          {item.label}
-        </a>
-      ))}
+      <div class="site-header__nav-main">
+        {mainNav.map((item) => (
+          <a
+            href={item.href}
+            class:list={['site-header__link', { 'is-active': currentPath === item.href }]}
+            style={`--link-color: ${item.color};`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <a
+        href={contactItem.href}
+        class:list={['site-header__link', 'site-header__nav-contact', { 'is-active': currentPath === contactItem.href }]}
+        style={`--link-color: ${contactItem.color};`}
+      >
+        {contactItem.label}
+      </a>
     </nav>
   </div>
 </header>
@@ -64,8 +73,22 @@ const currentPath = Astro.url.pathname;
   .site-header__nav {
     display: flex;
     align-items: center;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .site-header__nav-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
     gap: 28px;
     flex-wrap: wrap;
+  }
+
+  .site-header__nav-contact {
+    margin-left: 28px;
+    white-space: nowrap;
   }
 
   .site-header__link {
@@ -122,6 +145,18 @@ const currentPath = Astro.url.pathname;
 
     .site-header__nav.is-open {
       display: flex;
+    }
+
+    .site-header__nav-main {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+      gap: 4px;
+    }
+
+    .site-header__nav-contact {
+      margin-left: 0;
     }
 
     .site-header__link {
