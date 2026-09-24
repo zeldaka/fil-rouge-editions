@@ -28,15 +28,16 @@ const nav = [
     <div class="site-footer__contact">
       <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
       <a href={`tel:${siteConfig.phoneDisplay.replace(/\s/g, '')}`}>{siteConfig.phoneDisplay}</a>
+      <a href={`tel:${siteConfig.phoneIsraelDisplay.replace(/\s/g, '')}`}>{siteConfig.phoneIsraelDisplay}</a>
       <a class="site-footer__whatsapp" href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
         <WhatsAppIcon size={20} />
         M'écrire sur WhatsApp
       </a>
     </div>
+  </div>
 
-    <div class="site-footer__instagram">
-      <InstagramCarousel compact />
-    </div>
+  <div class="container site-footer__instagram">
+    <InstagramCarousel compact wrap />
   </div>
 </footer>
 
@@ -49,7 +50,7 @@ const nav = [
 
   .site-footer__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr 1.2fr;
     gap: var(--space-4);
   }
 
@@ -92,7 +93,10 @@ const nav = [
     align-items: flex-start;
   }
 
-  .site-footer__whatsapp {
+  /* Spécificité volontairement plus élevée que ".site-footer__contact a"
+     ci-dessus, sinon la règle générale (texte blanc) l'emporte et rend le
+     texte du bouton invisible sur son fond clair. */
+  .site-footer__contact a.site-footer__whatsapp {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -102,6 +106,12 @@ const nav = [
     border-radius: var(--radius-pill);
     font-weight: 600;
     opacity: 1;
+  }
+
+  .site-footer__instagram {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   @media (max-width: 900px) {
@@ -123,5 +133,15 @@ const nav = [
   .site-footer__instagram :global(.instagram__handle),
   .site-footer__instagram :global(.instagram__empty) {
     color: rgba(255, 255, 255, 0.8);
+  }
+
+  .site-footer__instagram :global(.eyebrow) {
+    color: #ffffff;
+  }
+
+  .site-footer__instagram :global(a.instagram__more) {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
   }
 </style>

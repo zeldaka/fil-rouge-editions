@@ -3,15 +3,17 @@
 // page qui l'utilise reste statique et rapide, le flux se remplit après le
 // chargement. Tant qu'aucun jeton n'est configuré, affiche un message
 // d'attente plutôt qu'une erreur.
-import WhatsAppIcon from './WhatsAppIcon.astro';
 import InstagramIcon from './InstagramIcon.astro';
 import { siteConfig } from '../data/config';
 
 interface Props {
   compact?: boolean;
   hideHeader?: boolean;
+  limit?: number;
+  showMoreLink?: boolean;
+  wrap?: boolean;
 }
-const { compact = false, hideHeader = false } = Astro.props;
+const { compact = false, hideHeader = false, limit = 8, showMoreLink = false, wrap = false } = Astro.props;
 
 const profileUrl = siteConfig.instagramHandle
   ? `https://instagram.com/${siteConfig.instagramHandle.replace('@', '')}`
@@ -20,7 +22,14 @@ const profileUrl = siteConfig.instagramHandle
 const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<div class:list={['instagram', { 'instagram--compact': compact }]} data-instagram-root id={uid}>
+<div
+  class:list={['instagram', { 'instagram--compact': compact, 'instagram--wrap': wrap }]}
+  data-instagram-root
+  data-limit={limit}
+  data-show-more={showMoreLink && profileUrl ? 'true' : 'false'}
+  data-profile-url={profileUrl}
+  id={uid}
+>
   {!hideHeader && (
     <div class="instagram__header">
       <InstagramIcon size={compact ? 18 : 22} />
@@ -69,7 +78,7 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     padding-bottom: 4px;
   }
 
-  .instagram__scroller :global(a) {
+  .instagram__scroller :global(a.instagram__tile) {
     flex: 0 0 auto;
     width: 160px;
     height: 160px;
@@ -77,9 +86,10 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     overflow: hidden;
     scroll-snap-align: start;
     display: block;
+    position: relative;
   }
 
-  .instagram--compact .instagram__scroller :global(a) {
+  .instagram--compact .instagram__scroller :global(a.instagram__tile) {
     width: 96px;
     height: 96px;
     border-radius: 10px;
@@ -89,6 +99,54 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+  }
+
+  /* Mode "wrap" (pied de page) : pas de défilement horizontal — les
+     vignettes passent à la ligne et tout ce qui dépasse la première rangée
+     est simplement masqué, pour n'afficher que des vignettes entières, en
+     nombre adapté à la largeur de l'écran. */
+  .instagram--wrap .instagram__scroller {
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 160px;
+  }
+
+  .instagram--wrap.instagram--compact .instagram__scroller {
+    max-height: 96px;
+  }
+
+  .instagram__scroller :global(a.instagram__more) {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 160px;
+    border-radius: 14px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    background: var(--color-card-bg, rgba(0, 0, 0, 0.03));
+    border: 1px solid var(--color-card-border, rgba(0, 0, 0, 0.1));
+    color: var(--color-ink, inherit);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px;
+  }
+
+  .instagram--compact .instagram__scroller :global(a.instagram__more) {
+    width: 96px;
+    height: 96px;
+    font-size: 0.75rem;
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .instagram__scroller :global(a.instagram__more:hover) {
+    opacity: 0.85;
   }
 
   .instagram__empty {
@@ -124,10 +182,16 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
         return;
       }
 
+      const limit = Number(root.dataset.limit ?? '8') || 8;
+      const showMore = root.dataset.showMore === 'true';
+      const profileUrl = root.dataset.profileUrl;
+      const visible = posts.slice(0, limit);
+
       scroller.innerHTML = '';
-      posts.forEach((post) => {
+      visible.forEach((post) => {
         const a = document.createElement('a');
         a.href = post.permalink;
+        a.className = 'instagram__tile';
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.setAttribute('aria-label', post.caption ? post.caption.slice(0, 80) : 'Voir la publication sur Instagram');
@@ -138,6 +202,16 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
         a.appendChild(img);
         scroller.appendChild(a);
       });
+
+      if (showMore && profileUrl) {
+        const more = document.createElement('a');
+        more.href = profileUrl;
+        more.className = 'instagram__more';
+        more.target = '_blank';
+        more.rel = 'noopener noreferrer';
+        more.textContent = 'Voir plus →';
+        scroller.appendChild(more);
+      }
     });
   }
 
