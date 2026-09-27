@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#fdf9f0"/>
-  <path
-    d="M13,50 L13,12 L26,12 M13,29 L22,29
-       M35,50 L35,12 C43,12 46,14 46,19 C46,24 41,27 35,27
-       M37,27 L48,50"
-    fill="none" stroke="#ea5769" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"
-  />
+  <text x="7" y="41" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="#ea5769">K</text>
+  <text x="27" y="37" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-weight="600" fill="#ea5769">lein</text>
+  <circle cx="31" cy="49" r="1.8" fill="#ea5769"/>
+  <circle cx="37" cy="49" r="1.8" fill="#ea5769"/>
+  <circle cx="43" cy="49" r="1.8" fill="#ea5769"/>
 </svg>
