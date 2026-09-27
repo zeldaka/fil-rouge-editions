@@ -1,9 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <rect width="100" height="100" rx="22" fill="#fdf9f0"/>
   <path
-    d="M32,17 L32,79
-       M32,46 L65,17
-       M32,46 L50,84 A36,36 0 1,1 50,12 A36,36 0 1,1 50,84"
-    fill="none" stroke="#1B1F9C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+    d="M50,84 A36,36 0 1,1 50,12 A36,36 0 1,1 50,84"
+    fill="none" stroke="#1B1F9C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+  />
+  <path
+    d="M27,12 L27,84
+       M27,43 L72,12
+       M27,43 L50,84"
+    fill="none" stroke="#1B1F9C" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"
   />
 </svg>
