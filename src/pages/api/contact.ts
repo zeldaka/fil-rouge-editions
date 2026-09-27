@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   }
 
   const emailBody = {
-    from: `Fil Rouge Éditions <contact@filrouge-editions.com>`,
+    from: `Klein Éditions <contact@klein-editions.com>`,
     to: [siteConfig.email],
     reply_to: email,
     subject: `Nouveau message — ${prenomNom}`,
