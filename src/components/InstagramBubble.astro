@@ -34,6 +34,13 @@ const profileUrl = siteConfig.instagramHandle
     transform: scale(1.05);
   }
 
+  /* Apparition légèrement différée, juste après la bulle WhatsApp. */
+  @media (prefers-reduced-motion: no-preference) {
+    .instagram-bubble {
+      animation: bubble-in 0.45s ease-out 1.05s backwards;
+    }
+  }
+
   @media (max-width: 640px) {
     .instagram-bubble {
       right: 16px;

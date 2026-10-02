@@ -70,11 +70,11 @@ import { influences } from '../data/influences';
 
     <section class="section influences">
       <div class="container influences__inner">
-        <h2 class="influences__title">Les livres qui m'ont donné envie de raconter des
+        <h2 class="influences__title" data-reveal>Les livres qui m'ont donné envie de raconter des
          histoires</h2>
         <div class="influences__grid">
-          {influences.map((item) => (
-            <div class="influences__card">
+          {influences.map((item, i) => (
+            <div class="influences__card" data-reveal style={`--reveal-delay: ${(i % 6) * 60}ms`}>
               <div class="influences__cover">
                 <Image src={item.image} alt={`Couverture de ${item.oeuvre}, ${item.auteur}`} width={300} height={450} />
               </div>

@@ -34,6 +34,13 @@ import { siteConfig } from '../data/config';
     transform: scale(1.05);
   }
 
+  /* Apparition légèrement différée, après le reste de la page. */
+  @media (prefers-reduced-motion: no-preference) {
+    .whatsapp-bubble {
+      animation: bubble-in 0.45s ease-out 0.9s backwards;
+    }
+  }
+
   @media (max-width: 640px) {
     .whatsapp-bubble {
       right: 16px;

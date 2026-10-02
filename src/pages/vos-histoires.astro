@@ -16,8 +16,8 @@ import { categories } from '../data/categories';
       <h1>Vos histoires</h1>
 
       <div class="histoires__grid">
-        {categories.map((cat) => (
-          <div class="card histoires__card">
+        {categories.map((cat, i) => (
+          <div class="card histoires__card" data-reveal style={`--reveal-delay: ${(i % 3) * 90}ms`}>
             <h3>{cat.title}</h3>
             {cat.description && <p>{cat.description}</p>}
           </div>
@@ -26,12 +26,12 @@ import { categories } from '../data/categories';
 
       {/* Texte de mention (langues / à distance), rédigé à partir du brief section 19 —
           à valider ou reformuler par Audrey, ce n'est pas une citation littérale. */}
-      <p class="histoires__note">
+      <p class="histoires__note" data-reveal>
         Les projets sont menés en présentiel ou à distance, avec des personnes situées dans
         différents pays, en français, en anglais ou en espagnol.
       </p>
 
-      <div class="histoires__cta">
+      <div class="histoires__cta" data-reveal>
         <a class="btn btn-primary" href="/contact/">Parlons de votre histoire</a>
       </div>
     </div>

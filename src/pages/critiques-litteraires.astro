@@ -73,8 +73,8 @@ const thematiquesRemplies = thematiques.filter((theme) => theme.livres.length > 
           <h2>Conseils de lecture</h2>
 
           <div class="conseils__grid">
-            {thematiquesRemplies.map((theme) => (
-              <div class="card conseils__card">
+            {thematiquesRemplies.map((theme, i) => (
+              <div class="card conseils__card" data-reveal style={`--reveal-delay: ${(i % 3) * 90}ms`}>
                 <h3>{theme.titre}</h3>
                 <ul class="conseils__livres">
                   {theme.livres.map((livre) => (

@@ -97,13 +97,22 @@ const currentPath = Astro.url.pathname;
     font-size: 0.95rem;
     text-decoration: none;
     color: var(--color-ink);
-    padding-bottom: 3px;
-    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
+    /* Trait de soulignement à la couleur de la rubrique, qui se déploie de
+       gauche à droite au survol (et reste affiché sur la page active). */
+    background: linear-gradient(var(--link-color, var(--accent-accueil)), var(--link-color, var(--accent-accueil)))
+      left bottom / 0% 2px no-repeat;
   }
 
   .site-header__link.is-active,
   .site-header__link:hover {
-    border-bottom-color: var(--link-color, var(--accent-accueil));
+    background-size: 100% 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header__link {
+      transition: background-size 0.3s ease;
+    }
   }
 
   .site-header__toggle {

@@ -118,6 +118,16 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     display: block;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .instagram__scroller :global(img) {
+      transition: transform 0.4s ease;
+    }
+
+    .instagram__scroller :global(a.instagram__tile:hover img) {
+      transform: scale(1.06);
+    }
+  }
+
   /* Mode "fill" : les vignettes se répartissent bord à bord sur toute la
      largeur disponible, sans défilement — leur nombre est calculé côté
      script en fonction de la largeur de l'écran (voir <script> plus bas). */

@@ -49,7 +49,7 @@ import { categories } from '../data/categories';
       de liens sont à valider par Audrey. */}
   <section class="section accueil-suite">
     <div class="container accueil-suite__grid">
-      <div class="accueil-suite__bloc">
+      <div class="accueil-suite__bloc" data-reveal>
         <h2>Une plume au service des familles</h2>
         <p>
           Bercée par les mots, la littérature et la transmission des histoires de vie, j’ai décidé
@@ -63,7 +63,7 @@ import { categories } from '../data/categories';
         <a class="accueil-suite__lien" href="/a-propos/">Découvrir mon parcours</a>
       </div>
 
-      <div class="accueil-suite__bloc">
+      <div class="accueil-suite__bloc" data-reveal style="--reveal-delay: 120ms">
         <h2>Biographies familiales, récits de vie, mémoires</h2>
         <ul class="accueil-suite__liste">
           {categories.map((cat) => (
@@ -132,6 +132,29 @@ import { categories } from '../data/categories';
     line-height: 1.65;
   }
 
+  /* Entrée en douceur de l'accroche, de la promesse et du bouton. Le H1 et
+     la photo n'en ont pas : ce sont les premiers éléments que le navigateur
+     doit afficher (LCP), on ne les retarde pas. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__tagline,
+    .hero__promesse,
+    .hero__text .btn {
+      animation: fade-up 0.8s ease-out backwards;
+    }
+
+    .hero__tagline {
+      animation-delay: 0.15s;
+    }
+
+    .hero__promesse {
+      animation-delay: 0.3s;
+    }
+
+    .hero__text .btn {
+      animation-delay: 0.45s;
+    }
+  }
+
   .hero__photo {
     flex: 1;
     min-width: 280px;
@@ -196,6 +219,17 @@ import { categories } from '../data/categories';
     text-decoration-color: var(--section-color);
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
+  }
+
+  .accueil-suite__lien::after {
+    content: '→';
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.2s ease;
+  }
+
+  .accueil-suite__lien:hover::after {
+    transform: translateX(4px);
   }
 
   @media (max-width: 860px) {
