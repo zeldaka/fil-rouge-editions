@@ -33,11 +33,11 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   // Piège à robots : champ invisible pour un visiteur humain (voir
   // contact.astro) — un bot qui remplit tous les champs le remplit aussi.
   if (data.get('site_web')) {
-    return redirect('/contact?envoye=1');
+    return redirect('/contact/?envoye=1');
   }
 
   if (isRateLimited(clientAddress ?? 'inconnu')) {
-    return redirect('/contact?erreur=envoi');
+    return redirect('/contact/?erreur=envoi');
   }
 
   const prenomNom = sanitizeLine(data.get('prenomNom')?.toString() ?? '', 200);
@@ -49,7 +49,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   const message = (data.get('message')?.toString() ?? '').trim().slice(0, 4000);
 
   if (!prenomNom || !email || !EMAIL_RE.test(email)) {
-    return redirect('/contact?erreur=champs');
+    return redirect('/contact/?erreur=champs');
   }
 
   // Nécessite un compte Resend (gratuit pour ce volume) et un domaine vérifié.
@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   const apiKey = import.meta.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("RESEND_API_KEY manquante : impossible d'envoyer le message de contact.");
-    return redirect('/contact?erreur=config');
+    return redirect('/contact/?erreur=config');
   }
 
   const emailBody = {
@@ -90,12 +90,12 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
 
     if (!response.ok) {
       console.error("Échec de l'envoi via Resend :", await response.text());
-      return redirect('/contact?erreur=envoi');
+      return redirect('/contact/?erreur=envoi');
     }
   } catch (error) {
     console.error("Erreur lors de l'envoi du message de contact :", error);
-    return redirect('/contact?erreur=envoi');
+    return redirect('/contact/?erreur=envoi');
   }
 
-  return redirect('/contact?envoye=1');
+  return redirect('/contact/?envoye=1');
 };

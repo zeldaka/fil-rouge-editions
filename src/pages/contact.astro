@@ -70,7 +70,7 @@ const erreur = Astro.url.searchParams.get('erreur');
           </p>
         )}
 
-        <form class="contact__form" method="POST" action="/api/contact">
+        <form class="contact__form" method="POST" action="/api/contact/">
           {/* Piège à robots : champ caché pour les visiteurs, invisible aux
               lecteurs d'écran (aria-hidden + tabindex=-1), que seuls les
               robots de spam remplissent généralement. */}
