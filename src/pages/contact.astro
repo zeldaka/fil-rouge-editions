@@ -126,6 +126,11 @@ const erreur = Astro.url.searchParams.get('erreur');
           </div>
 
           <button type="submit" class="btn btn-primary contact__submit">Envoyer</button>
+
+          <p class="contact__rgpd">
+            Vos informations servent uniquement à vous répondre. En savoir plus :
+            {' '}<a href="/politique-de-confidentialite/">politique de confidentialité</a>.
+          </p>
         </form>
       </div>
     </div>
@@ -243,6 +248,12 @@ const erreur = Astro.url.searchParams.get('erreur');
   .contact__submit {
     grid-column: 1 / -1;
     justify-self: start;
+  }
+
+  .contact__rgpd {
+    grid-column: 1 / -1;
+    font-size: 0.85rem;
+    color: var(--color-ink-muted);
   }
 
   .contact__banner {

@@ -1,0 +1,55 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import LegalValue from '../components/LegalValue.astro';
+import { legal } from '../data/legal';
+import { siteConfig } from '../data/config';
+---
+
+<LegalLayout
+  title="Mentions légales · Klein Éditions"
+  description="Mentions légales du site Klein Éditions : éditeur, hébergement, propriété intellectuelle et médiation."
+  heading="Mentions légales"
+>
+  <h2>Éditeur du site</h2>
+  <p>Le site www.klein-editions.com est édité par :</p>
+  <ul>
+    <li><LegalValue value={legal.editeur} />, <LegalValue value={legal.statut} /></li>
+    <li>SIRET : <LegalValue value={legal.siret} /></li>
+    <li>Adresse : <LegalValue value={legal.adresse} /></li>
+    <li>TVA : <LegalValue value={legal.tva} /></li>
+    <li>E-mail : <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+    <li>Téléphone : {siteConfig.phoneDisplay}</li>
+  </ul>
+  <p>Directrice de la publication : <LegalValue value={legal.directionPublication} />.</p>
+
+  <h2>Hébergement</h2>
+  <p>
+    {legal.hebergeur.nom}, {legal.hebergeur.adresse} —
+    {' '}<a href={legal.hebergeur.site} target="_blank" rel="noopener noreferrer">vercel.com</a> —
+    téléphone : <LegalValue value={legal.hebergeur.telephone} />.
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    Les textes, photographies, logo et éléments graphiques de ce site sont la propriété de
+    {' '}<LegalValue value={legal.editeur} />, sauf mention contraire. Toute reproduction ou
+    réutilisation, totale ou partielle, sans autorisation écrite préalable est interdite.
+  </p>
+  <p>
+    Les couvertures de livres présentées sur la page « À propos » restent la propriété de leurs
+    éditeurs et ayants droit ; elles sont reproduites à titre d'illustration.
+  </p>
+
+  <h2>Médiation de la consommation</h2>
+  <p>
+    Conformément aux articles L.612-1 et suivants du Code de la consommation, en cas de litige
+    non résolu à l'amiable, le client consommateur peut recourir gratuitement au médiateur de la
+    consommation suivant : <LegalValue value={legal.mediateur} />.
+  </p>
+
+  <h2>Données personnelles</h2>
+  <p>
+    Le traitement des données transmises via ce site est décrit dans la
+    {' '}<a href="/politique-de-confidentialite/">politique de confidentialité</a>.
+  </p>
+</LegalLayout>

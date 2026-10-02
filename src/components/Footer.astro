@@ -39,6 +39,12 @@ const nav = [
   <div class="container site-footer__instagram" data-instagram-wrap>
     <InstagramCarousel compact fill />
   </div>
+
+  <div class="container site-footer__legal">
+    <p>© {new Date().getFullYear()} Klein Éditions</p>
+    <a href="/mentions-legales/">Mentions légales</a>
+    <a href="/politique-de-confidentialite/">Politique de confidentialité</a>
+  </div>
 </footer>
 
 <style>
@@ -113,6 +119,26 @@ const nav = [
     margin-top: var(--space-5);
     padding-top: var(--space-4);
     border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .site-footer__legal {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 24px;
+    font-size: 0.85rem;
+  }
+
+  .site-footer__legal a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .site-footer__legal a:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 900px) {

@@ -1,0 +1,20 @@
+---
+// Affiche une valeur de src/data/legal.ts — surlignée si elle reste à compléter.
+import { A_COMPLETER } from '../data/legal';
+
+interface Props {
+  value: string;
+}
+const { value } = Astro.props;
+---
+
+{value.startsWith(A_COMPLETER) ? <mark class="a-completer">{value}</mark> : value}
+
+<style>
+  .a-completer {
+    background: var(--accent-conseils);
+    color: var(--color-ink);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+</style>

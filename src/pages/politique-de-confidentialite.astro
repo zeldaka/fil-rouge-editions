@@ -1,0 +1,84 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import LegalValue from '../components/LegalValue.astro';
+import { legal } from '../data/legal';
+import { siteConfig } from '../data/config';
+---
+
+<LegalLayout
+  title="Politique de confidentialité · Klein Éditions"
+  description="Comment Klein Éditions traite les données personnelles transmises via le site, et comment exercer vos droits."
+  heading="Politique de confidentialité"
+>
+  <p>Dernière mise à jour : {legal.miseAJour}.</p>
+
+  <h2>Responsable du traitement</h2>
+  <p>
+    <LegalValue value={legal.editeur} />, <LegalValue value={legal.adresse} /> — joignable à
+    {' '}<a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+  </p>
+
+  <h2>Données collectées</h2>
+  <ul>
+    <li>
+      Via le formulaire de contact : vos prénom et nom, votre adresse e-mail et, si vous les
+      renseignez, votre téléphone, le type et la langue de votre projet, quelques mots sur votre
+      histoire et votre message.
+    </li>
+    <li>
+      Lors de vos échanges par e-mail, téléphone ou WhatsApp : les informations que vous choisissez
+      de transmettre.
+    </li>
+    <li>
+      Lors de la consultation du site : des données techniques (adresse IP, pages consultées,
+      navigateur) enregistrées par l'hébergeur pour le fonctionnement et la sécurité du site.
+    </li>
+  </ul>
+
+  <h2>Finalité et base légale</h2>
+  <p>
+    Ces données servent uniquement à répondre à votre demande et, le cas échéant, à préparer
+    votre projet de livre. Ce traitement repose sur les mesures précontractuelles prises à votre
+    demande (article 6.1.b du RGPD).
+  </p>
+
+  <h2>Destinataires</h2>
+  <p>
+    Vos données sont destinées à <LegalValue value={legal.editeur} /> uniquement. Elles ne sont
+    jamais vendues ni cédées. Deux prestataires techniques interviennent :
+  </p>
+  <ul>
+    <li>{legal.hebergeur.nom} (États-Unis), hébergeur du site ;</li>
+    <li>Resend, service de Plus Five Five, Inc. (États-Unis), qui achemine les messages du formulaire de contact.</li>
+  </ul>
+  <p>
+    Ces transferts hors de l'Union européenne sont encadrés par les garanties prévues par le
+    RGPD, notamment les clauses contractuelles types adoptées par la Commission européenne.
+  </p>
+
+  <h2>Durée de conservation</h2>
+  <p>
+    Les messages reçus sont conservés trois ans à compter de notre dernier échange, puis
+    supprimés. Si un accompagnement est engagé, les données nécessaires sont conservées pendant
+    la durée imposée par les obligations légales (comptables notamment).
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation,
+    d'opposition et de portabilité de vos données. Pour l'exercer, écrivez à
+    {' '}<a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>. Vous pouvez également
+    adresser une réclamation à la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">cnil.fr</a>).
+  </p>
+
+  <h2>Cookies et contenus tiers</h2>
+  <p>
+    Ce site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.
+    Les polices de caractères sont hébergées sur le site lui-même.
+  </p>
+  <p>
+    Lorsque le fil Instagram est affiché, ses images sont chargées depuis les serveurs
+    d'Instagram (Meta), qui reçoivent alors votre adresse IP. Les liens vers WhatsApp et
+    Instagram ne transmettent aucune donnée tant que vous ne cliquez pas dessus.
+  </p>
+</LegalLayout>

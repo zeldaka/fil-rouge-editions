@@ -1,0 +1,51 @@
+---
+// Mise en page commune aux pages légales (mentions légales, confidentialité).
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+}
+const { title, description, heading } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <section class="section legal">
+    <div class="container legal__content">
+      <h1>{heading}</h1>
+      <slot />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal__content {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .legal__content h1 {
+    margin-bottom: var(--space-2);
+  }
+
+  .legal__content :global(h2) {
+    font-size: 1.35rem;
+    margin-top: var(--space-3);
+  }
+
+  .legal__content :global(p),
+  .legal__content :global(li) {
+    color: var(--color-ink-muted);
+    line-height: 1.7;
+  }
+
+  .legal__content :global(ul) {
+    margin: 0;
+    padding-left: 1.2em;
+    display: grid;
+    gap: 6px;
+  }
+</style>
