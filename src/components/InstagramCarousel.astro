@@ -1,8 +1,11 @@
 ---
 // Flux Instagram chargé côté client (fetch vers /api/instagram-feed) : la
 // page qui l'utilise reste statique et rapide, le flux se remplit après le
-// chargement. Tant qu'aucun jeton n'est configuré, affiche un message
-// d'attente plutôt qu'une erreur.
+// chargement. Le bloc reste masqué tant que le flux ne renvoie aucune
+// publication (jeton absent ou expiré, erreur réseau) : pas de texte
+// d'attente visible des visiteurs ni indexé par Google. Le conteneur qui
+// l'entoure peut porter data-instagram-wrap pour être masqué avec lui
+// (voir global.css).
 import InstagramIcon from './InstagramIcon.astro';
 import { siteConfig } from '../data/config';
 
@@ -39,6 +42,7 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
   data-fill={fill ? 'true' : 'false'}
   data-tile-target={compact ? 110 : 170}
   id={uid}
+  hidden
 >
   {!hideHeader && (
     <div class="instagram__header">
@@ -52,9 +56,7 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     </div>
   )}
 
-  <div class="instagram__scroller" data-instagram-scroller>
-    <p class="instagram__empty" data-instagram-empty>Chargement des dernières publications…</p>
-  </div>
+  <div class="instagram__scroller" data-instagram-scroller></div>
 </div>
 
 <style>
@@ -62,6 +64,10 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
     display: flex;
     flex-direction: column;
     gap: 14px;
+  }
+
+  .instagram[hidden] {
+    display: none;
   }
 
   .instagram__header {
@@ -166,11 +172,6 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
   .instagram__scroller :global(a.instagram__more:hover) {
     opacity: 0.85;
   }
-
-  .instagram__empty {
-    color: var(--color-ink-soft);
-    font-size: 0.9rem;
-  }
 </style>
 
 <script>
@@ -200,11 +201,8 @@ const uid = `ig-${Math.random().toString(36).slice(2, 9)}`;
       const scroller = root.querySelector<HTMLElement>('[data-instagram-scroller]');
       if (!scroller) return;
 
-      if (!posts || posts.length === 0) {
-        const empty = scroller.querySelector('[data-instagram-empty]');
-        if (empty) empty.textContent = 'Le flux Instagram apparaîtra ici une fois la connexion configurée.';
-        return;
-      }
+      if (!posts || posts.length === 0) return;
+      root.hidden = false;
 
       const maxLimit = Number(root.dataset.limit ?? '8') || 8;
       const showMore = root.dataset.showMore === 'true';

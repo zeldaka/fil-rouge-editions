@@ -9,6 +9,10 @@ import { thematiques } from '../data/livres';
 const instagramUrl = siteConfig.instagramHandle
   ? `https://instagram.com/${siteConfig.instagramHandle.replace('@', '')}`
   : undefined;
+
+// Seules les thématiques qui ont au moins un livre sont affichées : pas de
+// carte « Sélection à venir » en ligne. Sans aucune, la section disparaît.
+const thematiquesRemplies = thematiques.filter((theme) => theme.livres.length > 0);
 ---
 
 <Layout
@@ -20,7 +24,7 @@ const instagramUrl = siteConfig.instagramHandle
       <Thread variant="a" color="var(--accent-critiques)" />
     </div>
 
-    <section class="section critiques">
+    <section class:list={['section', 'critiques', { 'critiques--avant-conseils': thematiquesRemplies.length > 0 }]}>
       <div class="container">
         <div class="critiques__content">
           <h1>Critiques littéraires</h1>
@@ -57,26 +61,41 @@ const instagramUrl = siteConfig.instagramHandle
           </div>
         </div>
 
-        <div class="critiques__feed">
+        <div class="critiques__feed" data-instagram-wrap>
           <InstagramCarousel hideHeader limit={6} fill showMoreLink />
         </div>
       </div>
     </section>
 
-    <section class="section conseils">
-      <div class="container">
-        <h2>Conseils de lecture</h2>
+    {thematiquesRemplies.length > 0 && (
+      <section class="section conseils">
+        <div class="container">
+          <h2>Conseils de lecture</h2>
 
-        <div class="conseils__grid">
-          {thematiques.map((theme) => (
-            <div class="card conseils__card">
-              <h3>{theme.titre}</h3>
-              <p class="conseils__empty">Sélection à venir.</p>
-            </div>
-          ))}
+          <div class="conseils__grid">
+            {thematiquesRemplies.map((theme) => (
+              <div class="card conseils__card">
+                <h3>{theme.titre}</h3>
+                <ul class="conseils__livres">
+                  {theme.livres.map((livre) => (
+                    <li>
+                      <p class="conseils__livre">
+                        {livre.lien ? (
+                          <a href={livre.lien} target="_blank" rel="noopener noreferrer"><em>{livre.titre}</em></a>
+                        ) : (
+                          <em>{livre.titre}</em>
+                        )}, {livre.auteur}
+                      </p>
+                      <p class="conseils__presentation">{livre.presentation}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
   </div>
 </Layout>
 
@@ -102,7 +121,7 @@ const instagramUrl = siteConfig.instagramHandle
     position: relative;
   }
 
-  .critiques {
+  .critiques--avant-conseils {
     padding-bottom: var(--space-2);
   }
 
@@ -172,9 +191,22 @@ const instagramUrl = siteConfig.instagramHandle
     min-height: 140px;
   }
 
-  .conseils__empty {
-    margin-top: 10px;
-    color: var(--color-ink-soft);
+  .conseils__livres {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .conseils__livre {
     font-size: 0.95rem;
+  }
+
+  .conseils__presentation {
+    color: var(--color-ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
   }
 </style>

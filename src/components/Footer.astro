@@ -36,7 +36,7 @@ const nav = [
     </div>
   </div>
 
-  <div class="container site-footer__instagram">
+  <div class="container site-footer__instagram" data-instagram-wrap>
     <InstagramCarousel compact fill />
   </div>
 </footer>
@@ -131,8 +131,7 @@ const nav = [
   /* Le carrousel Instagram est un composant à part (styles qui lui sont
      propres) — on force ici son texte en blanc pour rester lisible sur
      le fond vert du pied de page. */
-  .site-footer__instagram :global(.instagram__handle),
-  .site-footer__instagram :global(.instagram__empty) {
+  .site-footer__instagram :global(.instagram__handle) {
     color: rgba(255, 255, 255, 0.95);
   }
 

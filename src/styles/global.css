@@ -184,6 +184,12 @@ img {
   padding: var(--space-3);
 }
 
+/* Le conteneur d'un carrousel Instagram disparaît avec lui tant que le flux
+   est vide (voir InstagramCarousel.astro). */
+[data-instagram-wrap]:has([data-instagram-root][hidden]) {
+  display: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
