@@ -28,6 +28,11 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Quicksand',
       cssVariable: '--font-quicksand',
+      // Police du texte courant, préchargée : on attend qu'elle arrive au
+      // lieu d'afficher d'abord la police de secours. Sinon, le passage de
+      // l'une à l'autre décale les longs paragraphes (CLS mesuré à 0,14 sur
+      // À propos, au-delà du seuil de 0,1 recommandé par Google).
+      display: 'block',
       weights: [400, 500, 600, 700],
       styles: ['normal'],
       fallbacks: ['system-ui', 'sans-serif'],

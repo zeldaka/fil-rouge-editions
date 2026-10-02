@@ -87,11 +87,11 @@ const structuredData = {
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-    {/* Polices auto-hébergées (voir astro.config.mjs). Préchargement limité
-        au texte courant (Quicksand) et aux titres (Lora droit), visibles dès
-        le premier écran — chacun est un seul fichier variable. */}
+    {/* Polices auto-hébergées (voir astro.config.mjs). Seul le texte courant
+        (Quicksand) est préchargé : précharger aussi Lora retardait la photo
+        de l'accueil (LCP ≈ +0,6 s sur mobile). */}
     <Font cssVariable="--font-quicksand" preload />
-    <Font cssVariable="--font-lora" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-lora" />
     <Font cssVariable="--font-poppins" />
   </head>
   <body>
