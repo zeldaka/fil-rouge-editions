@@ -42,9 +42,10 @@
   /* Fond du pied de page — même vert, éclairci */
   --color-footer-bg: #5ad4b0;
 
-  --font-serif: 'Lora', Georgia, serif;
-  --font-sans: 'Quicksand', system-ui, sans-serif;
-  --font-sans-alt: 'Poppins', system-ui, sans-serif;
+  /* Familles déclarées dans astro.config.mjs (polices auto-hébergées) */
+  --font-serif: var(--font-lora);
+  --font-sans: var(--font-quicksand);
+  --font-sans-alt: var(--font-poppins);
 
   --container-width: 1160px;
   --space-1: 8px;

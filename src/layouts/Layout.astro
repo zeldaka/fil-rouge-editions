@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppBubble from '../components/WhatsAppBubble.astro';
 import InstagramBubble from '../components/InstagramBubble.astro';
-import { getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import audreyPartage from '../assets/audrey-klein-partage.jpg';
 import '../styles/global.css';
 
@@ -87,12 +87,12 @@ const structuredData = {
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    {/* Polices auto-hébergées (voir astro.config.mjs). Préchargement limité
+        au texte courant (Quicksand) et aux titres (Lora droit), visibles dès
+        le premier écran — chacun est un seul fichier variable. */}
+    <Font cssVariable="--font-quicksand" preload />
+    <Font cssVariable="--font-lora" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-poppins" />
   </head>
   <body>
     <Header />
