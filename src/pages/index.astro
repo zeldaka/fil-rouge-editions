@@ -6,8 +6,8 @@ import audreyPhoto from '../assets/audrey-klein.png';
 ---
 
 <Layout
-  title="Accueil"
-  description="Klein Éditions — biographe personnelle et familiale. Récits de vie, mémoires et biographies familiales, écrits avec passion."
+  title="Audrey Klein, biographe familiale · Klein Éditions"
+  description="Audrey Klein, biographe personnelle et familiale : récits de vie, mémoires et biographies familiales, en français, anglais ou espagnol."
 >
   <section class="hero">
     <div class="hero__thread">
@@ -16,8 +16,12 @@ import audreyPhoto from '../assets/audrey-klein.png';
 
     <div class="container hero__grid">
       <div class="hero__text">
-        <h1>Klein Éditions</h1>
-        <p class="hero__subtitle">Biographe personnelle &amp; familiale</p>
+        {/* Le sous-titre fait partie du H1 (visuellement inchangé) : c'est
+            lui qui porte le mot-clé « biographe » pour Google. */}
+        <h1>
+          Klein Éditions
+          <span class="hero__subtitle">Biographe personnelle &amp; familiale</span>
+        </h1>
         <p class="hero__tagline">« Faites de votre vie un roman ! »</p>
         <p class="hero__promesse">
           Récits de vie, mémoires, roman familial ou destin personnel : je mets en mots vos histoires.
@@ -71,6 +75,9 @@ import audreyPhoto from '../assets/audrey-klein.png';
   }
 
   .hero__subtitle {
+    display: block;
+    margin-top: 18px;
+    line-height: 1.6;
     font-family: var(--font-sans-alt);
     font-size: clamp(1.4rem, 2.6vw, 1.9rem);
     font-weight: 300;

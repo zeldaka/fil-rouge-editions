@@ -8,6 +8,9 @@ import audreyPhoto from '../assets/audrey-klein.png';
 import '../styles/global.css';
 
 interface Props {
+  /** Titre complet de la page (balise <title>), marque comprise — aucun
+   * suffixe n'est ajouté, pour garder la main sur les mots-clés et la longueur
+   * (≈ 60 caractères max avant troncature dans Google). */
   title: string;
   description: string;
 }
@@ -43,14 +46,14 @@ const personSchema = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
 
-    <title>{title} · Klein Éditions</title>
+    <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Klein Éditions" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content={`${title} · Klein Éditions`} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
@@ -58,7 +61,7 @@ const personSchema = {
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} · Klein Éditions`} />
+    <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
