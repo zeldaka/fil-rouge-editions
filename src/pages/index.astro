@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Thread from '../components/Thread.astro';
 import { Image } from 'astro:assets';
 import audreyPhoto from '../assets/audrey-klein.png';
+import { categories } from '../data/categories';
 ---
 
 <Layout
@@ -38,6 +39,39 @@ import audreyPhoto from '../assets/audrey-klein.png';
           loading="eager"
           fetchpriority="high"
         />
+      </div>
+    </div>
+  </section>
+
+  {/* Donne à Google (et aux visiteurs) de quoi comprendre l'activité dès
+      l'accueil, avec des liens vers les rubriques. Les deux paragraphes
+      sont repris tels quels de la page À propos ; les titres et libellés
+      de liens sont à valider par Audrey. */}
+  <section class="section accueil-suite">
+    <div class="container accueil-suite__grid">
+      <div class="accueil-suite__bloc">
+        <h2>Une plume au service des familles</h2>
+        <p>
+          Bercée par les mots, la littérature et la transmission des histoires de vie, j’ai décidé
+          de mettre ma passion au service d’une mission et ma plume au service des familles.
+        </p>
+        <p>
+          Après un parcours dans l'édition (Gallimard, Zulma) et la critique littéraire
+          (Books'nJoy), j'accompagne aujourd’hui celles et ceux qui souhaitent préserver leur
+          mémoire familiale et transmettre leur histoire aux générations futures.
+        </p>
+        <a class="accueil-suite__lien" href="/a-propos/">Découvrir mon parcours</a>
+      </div>
+
+      <div class="accueil-suite__bloc">
+        <h2>Biographies familiales, récits de vie, mémoires</h2>
+        <ul class="accueil-suite__liste">
+          {categories.map((cat) => (
+            <li>{cat.title}</li>
+          ))}
+        </ul>
+        <a class="accueil-suite__lien" href="/vos-histoires/">Voir les types de projets</a>
+        <a class="accueil-suite__lien" href="/les-etapes/">Les huit étapes de l'accompagnement</a>
       </div>
     </div>
   </section>
@@ -120,4 +154,53 @@ import audreyPhoto from '../assets/audrey-klein.png';
     z-index: 0;
   }
 
+  .accueil-suite {
+    --section-color: var(--accent-accueil);
+    padding-top: 0;
+  }
+
+  .accueil-suite__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .accueil-suite__bloc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .accueil-suite__bloc p,
+  .accueil-suite__liste {
+    color: var(--color-ink-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .accueil-suite__liste {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+
+  .accueil-suite__liste li::marker {
+    color: var(--section-color);
+  }
+
+  /* Texte en encre (lisible), souligné à la couleur de la rubrique — même
+     principe que les liens du menu. */
+  .accueil-suite__lien {
+    font-weight: 700;
+    color: var(--color-ink);
+    text-decoration-color: var(--section-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 860px) {
+    .accueil-suite__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

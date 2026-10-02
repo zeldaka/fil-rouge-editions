@@ -30,6 +30,10 @@ import { categories } from '../data/categories';
         Les projets sont menés en présentiel ou à distance, avec des personnes situées dans
         différents pays, en français, en anglais ou en espagnol.
       </p>
+
+      <div class="histoires__cta">
+        <a class="btn btn-primary" href="/contact/">Parlons de votre histoire</a>
+      </div>
     </div>
   </section>
 </Layout>
@@ -94,5 +98,13 @@ import { categories } from '../data/categories';
     font-weight: 500;
     max-width: 560px;
     text-align: right;
+  }
+
+  .histoires__cta {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--space-4);
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
