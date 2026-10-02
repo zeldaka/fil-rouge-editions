@@ -4,7 +4,7 @@ import Footer from '../components/Footer.astro';
 import WhatsAppBubble from '../components/WhatsAppBubble.astro';
 import InstagramBubble from '../components/InstagramBubble.astro';
 import { getImage } from 'astro:assets';
-import audreyPhoto from '../assets/audrey-klein.png';
+import audreyPartage from '../assets/audrey-klein-partage.jpg';
 import '../styles/global.css';
 
 interface Props {
@@ -19,22 +19,42 @@ const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Image utilisée pour l'aperçu quand une page est partagée (réseaux
-// sociaux, WhatsApp, etc.) — format standard 1200×630.
-const ogImage = await getImage({ src: audreyPhoto, width: 1200, height: 630, format: 'jpg' });
+// sociaux, WhatsApp, etc.) — format standard 1200×630. Fichier dédié,
+// recadré à la main dans audrey-klein.png : un recadrage automatique au
+// centre coupait le haut du visage.
+const ogImage = await getImage({ src: audreyPartage, width: 1200, height: 630, format: 'jpg' });
 const ogImageURL = new URL(ogImage.src, Astro.site);
 
-// Données structurées (schema.org) : type "Person" — volontairement pas
+// Données structurées (schema.org) : "Person" (Audrey) et "Organization"
+// (Klein Éditions, la marque) — volontairement pas
 // "LocalBusiness"/"ProfessionalService", qui impliquerait une zone
 // géographique, contrairement au brief. Uniquement des informations
 // réelles, aucune inventée.
-const personSchema = {
+const siteURL = new URL('/', Astro.site).toString();
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Audrey Klein',
-  jobTitle: 'Biographe personnelle & familiale',
-  url: new URL('/', Astro.site).toString(),
-  email: 'mailto:contact@klein-editions.com',
-  sameAs: ['https://instagram.com/books_njoy'],
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteURL}#audrey-klein`,
+      name: 'Audrey Klein',
+      jobTitle: 'Biographe personnelle & familiale',
+      url: siteURL,
+      image: ogImageURL.toString(),
+      email: 'mailto:contact@klein-editions.com',
+      knowsLanguage: ['fr', 'en', 'es'],
+      worksFor: { '@id': `${siteURL}#klein-editions` },
+      sameAs: ['https://instagram.com/books_njoy', 'https://www.booksnjoy.com/'],
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteURL}#klein-editions`,
+      name: 'Klein Éditions',
+      url: siteURL,
+      email: 'mailto:contact@klein-editions.com',
+      founder: { '@id': `${siteURL}#audrey-klein` },
+    },
+  ],
 };
 ---
 
@@ -65,7 +85,7 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
