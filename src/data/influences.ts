@@ -50,7 +50,7 @@ export const influences: Influence[] = [
   { auteur: 'Donna Tartt', oeuvre: 'Le Chardonneret', image: donnaTartt },
   { auteur: 'Pat Conroy', oeuvre: 'Le Prince des marées', image: patConroy },
   { auteur: 'Philip Roth', oeuvre: "Le Complot contre l'Amérique", image: philipRoth },
-  { auteur: 'Carlos Ruiz Zafón', oeuvre: 'La Ombre du vent', image: carlosRuizZafon },
+  { auteur: 'Carlos Ruiz Zafón', oeuvre: "L'Ombre du vent", image: carlosRuizZafon },
   { auteur: 'Joseph Conrad', oeuvre: 'Lord Jim', image: josephConrad },
   { auteur: 'Frank Conroy', oeuvre: 'Corps et âme', image: frankConroy },
   { auteur: 'Jaume Cabré', oeuvre: 'Confiteor', image: jaumeCabre },
