@@ -18,10 +18,7 @@ import audreyPhoto from '../assets/audrey-klein.png';
       <div class="hero__text">
         <h1>Klein Éditions</h1>
         <p class="hero__subtitle">Biographe personnelle &amp; familiale</p>
-        <p class="hero__tagline">
-          <span class="hero__tagline-highlight" aria-hidden="true"></span>
-          <span class="hero__tagline-text">« Faites de votre vie un roman ! »</span>
-        </p>
+        <p class="hero__tagline">« Faites de votre vie un roman ! »</p>
         <p class="hero__promesse">
           Récits de vie, mémoires, roman familial ou destin personnel : je mets en mots vos histoires.
         </p>
@@ -81,55 +78,17 @@ import audreyPhoto from '../assets/audrey-klein.png';
   }
 
   .hero__tagline {
-    position: relative;
-    display: inline-block;
-    font-family: var(--font-sans-alt);
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-style: italic;
     font-size: 1.4rem;
-    color: #006dbb;
-  }
-
-  .hero__tagline-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero__tagline-highlight {
-    position: absolute;
-    left: -4px;
-    bottom: 2px;
-    height: 0.5em;
-    width: 0;
-    background: #f3a522;
-    opacity: 0.35;
-    border-radius: 3px;
-    z-index: 0;
-    animation: hero-highlight-draw 0.9s ease-out 0.5s forwards;
-  }
-
-  @keyframes hero-highlight-draw {
-    to {
-      width: calc(100% + 8px);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__tagline-highlight {
-      animation: none;
-      width: calc(100% + 8px);
-    }
+    color: var(--accent-accueil);
   }
 
   .hero__promesse {
-    font-family: var(--font-sans-alt);
     font-size: 1.05rem;
     color: var(--color-ink-muted);
     max-width: 460px;
     line-height: 1.65;
-  }
-
-  .hero__text :global(.btn-primary) {
-    font-family: var(--font-sans-alt);
   }
 
   .hero__photo {
