@@ -83,10 +83,10 @@ import audreyPhoto from '../assets/audrey-klein.png';
   .hero__tagline {
     position: relative;
     display: inline-block;
-    font-family: var(--font-serif);
-    font-style: italic;
+    font-family: var(--font-sans-alt);
+    font-weight: 600;
     font-size: 1.4rem;
-    color: #b8863a;
+    color: #006dbb;
   }
 
   .hero__tagline-text {
@@ -100,8 +100,8 @@ import audreyPhoto from '../assets/audrey-klein.png';
     bottom: 2px;
     height: 0.5em;
     width: 0;
-    background: #7b5ec9;
-    opacity: 0.3;
+    background: #f3a522;
+    opacity: 0.35;
     border-radius: 3px;
     z-index: 0;
     animation: hero-highlight-draw 0.9s ease-out 0.5s forwards;
@@ -121,10 +121,15 @@ import audreyPhoto from '../assets/audrey-klein.png';
   }
 
   .hero__promesse {
+    font-family: var(--font-sans-alt);
     font-size: 1.05rem;
     color: var(--color-ink-muted);
     max-width: 460px;
     line-height: 1.65;
+  }
+
+  .hero__text :global(.btn-primary) {
+    font-family: var(--font-sans-alt);
   }
 
   .hero__photo {
