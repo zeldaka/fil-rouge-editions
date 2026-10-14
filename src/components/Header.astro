@@ -140,8 +140,14 @@ const currentPath = Astro.url.pathname;
       display: flex;
     }
 
+    /* Menu fermé : masqué mais toujours en place, pour pouvoir animer son
+       ouverture (visibility le retire aussi du clavier et des lecteurs
+       d'écran). */
     .site-header__nav {
-      display: none;
+      display: flex;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
       position: absolute;
       top: 100%;
       left: 0;
@@ -155,7 +161,9 @@ const currentPath = Astro.url.pathname;
     }
 
     .site-header__nav.is-open {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
     }
 
     .site-header__nav-main {
@@ -175,6 +183,37 @@ const currentPath = Astro.url.pathname;
       width: 100%;
     }
   }
+
+  @media (max-width: 860px) and (prefers-reduced-motion: no-preference) {
+    /* visibility attend la fin du fondu à la fermeture, s'applique tout de
+       suite à l'ouverture. */
+    .site-header__nav {
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+    }
+
+    .site-header__nav.is-open {
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s;
+    }
+
+    .site-header__toggle-bar {
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+  }
+
+  /* Burger → croix quand le menu est ouvert. Le 1er enfant du bouton est
+     le texte masqué, d'où les barres en nth-child 2 à 4 (5px d'écart + 2px
+     d'épaisseur = 7px de décalage). */
+  .site-header__toggle[aria-expanded='true'] .site-header__toggle-bar:nth-child(2) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-header__toggle[aria-expanded='true'] .site-header__toggle-bar:nth-child(3) {
+    opacity: 0;
+  }
+
+  .site-header__toggle[aria-expanded='true'] .site-header__toggle-bar:nth-child(4) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
 </style>
 
 <script>
@@ -184,5 +223,8 @@ const currentPath = Astro.url.pathname;
   toggle?.addEventListener('click', () => {
     const isOpen = nav?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+    // Le bouton affiche une croix une fois ouvert : son libellé suit.
+    const label = toggle.querySelector('.visually-hidden');
+    if (label) label.textContent = isOpen ? 'Fermer le menu' : 'Ouvrir le menu';
   });
 </script>
