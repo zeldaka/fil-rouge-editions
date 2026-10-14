@@ -56,8 +56,8 @@ import { etapes } from '../data/etapes';
 
   /* Frise : les numéros sont des pastilles reliées par un fil vertical.
      Avec le script ci-dessous (et sans « Réduire les animations »), le fil
-     se remplit au défilement et chaque pastille s'allume quand elle passe
-     la ligne de lecture ; sinon, la frise s'affiche complète. */
+     se remplit au défilement, de la 1re pastille (haut de page) à la
+     dernière (bas de page) ; sinon, la frise s'affiche complète. */
   .etapes__list {
     --pastille: 44px;
     list-style: none;
@@ -169,8 +169,10 @@ import { etapes } from '../data/etapes';
 </style>
 
 <script>
-  // Frise : le fil se remplit au défilement et chaque pastille s'allume quand
-  // son centre passe la « ligne de lecture », à 60 % de la hauteur de l'écran.
+  // Frise : un « curseur » avance le long du fil au rythme du défilement de
+  // la page — sur la 1re pastille tout en haut, sur la dernière tout en bas,
+  // quelle que soit la taille de l'écran. Le fil se remplit jusqu'à lui et
+  // chaque pastille s'allume quand il l'atteint.
   const liste = document.querySelector<HTMLElement>('[data-etapes]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -187,14 +189,16 @@ import { etapes } from '../data/etapes';
 
     const actualiser = () => {
       planifie = false;
-      const repere = window.innerHeight * 0.6;
       const haut = liste.getBoundingClientRect().top;
+      const centres = items.map((item) => centre(item, haut));
+      const defilementMax = document.documentElement.scrollHeight - window.innerHeight;
+      const progression = defilementMax > 0 ? Math.min(1, Math.max(0, window.scrollY / defilementMax)) : 1;
+      const curseur = centres[0] + progression * (centres[centres.length - 1] - centres[0]);
+
       items.forEach((item, i) => {
-        const ici = centre(item, haut);
-        item.classList.toggle('is-reached', ici <= repere);
-        const suivant = items[i + 1];
-        if (suivant) {
-          const remplissage = (repere - ici) / (centre(suivant, haut) - ici);
+        item.classList.toggle('is-reached', centres[i] <= curseur + 0.5);
+        if (i < items.length - 1) {
+          const remplissage = (curseur - centres[i]) / (centres[i + 1] - centres[i]);
           item.style.setProperty('--remplissage', Math.min(1, Math.max(0, remplissage)).toFixed(3));
         }
       });
