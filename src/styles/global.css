@@ -217,6 +217,19 @@ img {
   }
 }
 
+/* Fondu entre les pages (Chrome, Edge, Safari ; ailleurs la page change
+   normalement). L'en-tête, nommé dans Header.astro, reste en place. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
 /* Apparition au défilement des éléments marqués data-reveal : la classe
    .reveal n'est posée par le script de Layout.astro que sur les éléments
    encore hors de l'écran au chargement — sans JavaScript, tout reste

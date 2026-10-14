@@ -51,6 +51,8 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 40;
+    /* Reste immobile pendant le fondu entre les pages (voir global.css). */
+    view-transition-name: site-header;
   }
 
   .site-header__bar {
