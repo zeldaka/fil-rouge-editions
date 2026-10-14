@@ -104,6 +104,7 @@ const thematiquesRemplies = thematiques.filter((theme) => theme.livres.length > 
     --section-color: var(--accent-critiques);
     position: relative;
     overflow: hidden;
+    overflow: clip; /* pas « hidden » seul : voir Thread.astro */
   }
 
   .page-thread {

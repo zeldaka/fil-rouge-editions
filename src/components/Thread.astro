@@ -49,4 +49,36 @@ const d = shapes[variant];
     height: 100%;
     overflow: visible;
   }
+
+  /* Le fil se déroule au fil de la lecture : son dévoilement suit le
+     défilement de la page (navigateurs récents). Ailleurs, il se dessine
+     une fois à l'arrivée dans l'écran (script de Layout.astro).
+     Le conteneur qui le rogne doit utiliser overflow: clip et non hidden :
+     une zone en overflow: hidden capterait la timeline view() à la place
+     de la page, et le fil resterait figé.
+     Propriétés détaillées volontairement : le minifieur du build
+     (lightningcss) replie sinon animation-timeline dans le raccourci
+     « animation », forme que Chrome rejette. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hand-thread {
+        animation-name: fil-deroule;
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range-start: cover 0%;
+        animation-range-end: contain 100%;
+      }
+    }
+  }
+
+  @keyframes fil-deroule {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0% 0);
+    }
+  }
 </style>

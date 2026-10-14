@@ -101,6 +101,7 @@ import { influences } from '../data/influences';
     --section-color: var(--accent-a-propos);
     position: relative;
     overflow: hidden;
+    overflow: clip; /* pas « hidden » seul : voir Thread.astro */
   }
 
   .page-thread {

@@ -142,6 +142,7 @@ const erreur = Astro.url.searchParams.get('erreur');
     --section-color: var(--accent-contact);
     position: relative;
     overflow: hidden;
+    overflow: clip; /* pas « hidden » seul : voir Thread.astro */
   }
 
   .contact h1 {

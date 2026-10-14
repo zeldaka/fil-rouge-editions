@@ -111,6 +111,10 @@ const structuredData = {
         const threads = document.querySelectorAll<HTMLElement>('.hand-thread');
         if (threads.length === 0) return;
 
+        // Navigateurs récents : le fil suit le défilement, entièrement en CSS
+        // (voir Thread.astro). Ce script ne sert plus que d'alternative.
+        if (CSS.supports('animation-timeline: view()')) return;
+
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (reduceMotion || !('IntersectionObserver' in window)) return;
 

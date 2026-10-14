@@ -36,6 +36,7 @@ import { etapes } from '../data/etapes';
   .etapes {
     position: relative;
     overflow: hidden;
+    overflow: clip; /* pas « hidden » seul : voir Thread.astro */
   }
 
   .etapes__thread {
