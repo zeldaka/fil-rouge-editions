@@ -245,6 +245,63 @@ const erreur = Astro.url.searchParams.get('erreur');
     resize: vertical;
   }
 
+  /* Champ actif : contour à la couleur de la rubrique, assombrie pour rester
+     bien visible (première valeur = secours sans color-mix). */
+  .contact__field input:focus,
+  .contact__field select:focus,
+  .contact__field textarea:focus {
+    outline: none;
+    border-color: var(--color-ink);
+    border-color: color-mix(in srgb, var(--section-color) 70%, black);
+    box-shadow: 0 0 0 3px rgba(41, 38, 36, 0.15);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--section-color) 25%, transparent);
+  }
+
+  .contact__field:focus-within label {
+    color: var(--color-ink);
+  }
+
+  /* Pendant l'envoi (voir le script) : petit cercle qui tourne. */
+  .contact__submit.is-sending {
+    cursor: progress;
+    opacity: 0.85;
+  }
+
+  .contact__submit.is-sending::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .contact__field input,
+    .contact__field select,
+    .contact__field textarea {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact__field label {
+      transition: color 0.2s ease;
+    }
+
+    .contact__submit.is-sending::before {
+      animation: rotation 0.8s linear infinite;
+    }
+
+    .contact__banner {
+      animation: fade-up 0.5s ease-out backwards;
+    }
+  }
+
+  @keyframes rotation {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   .contact__submit {
     grid-column: 1 / -1;
     justify-self: start;
@@ -282,3 +339,28 @@ const erreur = Astro.url.searchParams.get('erreur');
     }
   }
 </style>
+
+<script>
+  // Pendant l'envoi : bouton désactivé (pas de double envoi) et libellé
+  // « Envoi en cours… ». Rétabli si l'on revient sur la page avec « Retour »
+  // (la page peut alors être restaurée telle quelle par le navigateur).
+  const formulaire = document.querySelector<HTMLFormElement>('.contact__form');
+  const bouton = formulaire?.querySelector<HTMLButtonElement>('.contact__submit');
+
+  if (formulaire && bouton) {
+    const libelle = bouton.textContent?.trim() || 'Envoyer';
+
+    formulaire.addEventListener('submit', () => {
+      bouton.disabled = true;
+      bouton.classList.add('is-sending');
+      bouton.textContent = 'Envoi en cours…';
+    });
+
+    window.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return;
+      bouton.disabled = false;
+      bouton.classList.remove('is-sending');
+      bouton.textContent = libelle;
+    });
+  }
+</script>
