@@ -73,10 +73,10 @@ import { influences } from '../data/influences';
         <h2 class="influences__title">Les livres qui m'ont donné envie de raconter des
          histoires</h2>
         <div class="influences__grid">
-          {influences.map((item) => (
+          {influences.filter((item) => item.image).map((item) => (
             <div class="influences__card">
               <div class="influences__cover">
-                <Image src={item.image} alt={`Couverture de ${item.oeuvre}, ${item.auteur}`} width={300} height={450} />
+                <Image src={item.image!} alt={`Couverture de ${item.oeuvre}, ${item.auteur}`} width={300} height={450} />
               </div>
               <p class="influences__caption">
                 <em>{item.oeuvre}</em>

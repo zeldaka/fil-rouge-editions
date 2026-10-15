@@ -12,7 +12,6 @@ import patConroy from '../assets/influences/pat-conroy.jpg';
 import philipRoth from '../assets/influences/philip-roth.jpg';
 import stefanZweig from '../assets/influences/stefan-zweig.jpg';
 import carlosRuizZafon from '../assets/influences/carlos-ruiz-zafon.jpg';
-import josephConrad from '../assets/influences/joseph-conrad.jpg';
 import romainGary from '../assets/influences/romain-gary.jpg';
 import frankConroy from '../assets/influences/frank-conroy.jpg';
 import isaacBashevisSinger from '../assets/influences/isaac-bashevis-singer.jpg';
@@ -25,15 +24,14 @@ import ettyHillesum from '../assets/influences/etty-hillesum.jpg';
 import richardPowers from '../assets/influences/richard-powers.jpg';
 import danielMendelsohn from '../assets/influences/daniel-mendelsohn.jpeg';
 import anneBerest from '../assets/influences/anne-berest.jpg';
-import umbertoEco from '../assets/influences/umberto-eco.jpg';
 import lucaDiFulvio from '../assets/influences/luca-di-fulvio.jpg';
-import devantMoiLeMonde from '../assets/influences/devant-moi-le-monde.jpeg';
-import milena from '../assets/influences/milena.jpeg';
+import devantMoiLeMonde from '../assets/influences/devant-moi-le-monde.jpg';
+import milena from '../assets/influences/milena.jpg';
 
 export interface Influence {
   auteur: string;
   oeuvre: string;
-  image: ImageMetadata;
+  image?: ImageMetadata;
 }
 
 export const influences: Influence[] = [
@@ -53,12 +51,10 @@ export const influences: Influence[] = [
   { auteur: 'Pat Conroy', oeuvre: 'Le Prince des marées', image: patConroy },
   { auteur: 'Philip Roth', oeuvre: "Le Complot contre l'Amérique", image: philipRoth },
   { auteur: 'Carlos Ruiz Zafón', oeuvre: 'La Ombre du vent', image: carlosRuizZafon },
-  { auteur: 'Joseph Conrad', oeuvre: 'Lord Jim', image: josephConrad },
   { auteur: 'Frank Conroy', oeuvre: 'Corps et âme', image: frankConroy },
   { auteur: 'Jaume Cabré', oeuvre: 'Confiteor', image: jaumeCabre },
   { auteur: 'Bernard Malamud', oeuvre: 'L\'Homme de Kiev', image: bernardMalamud },
   { auteur: 'Richard Powers', oeuvre: 'Le Temps où nous chantions', image: richardPowers },
-  { auteur: 'Umberto Eco', oeuvre: 'Le Nom de la rose', image: umbertoEco },
   { auteur: 'Luca Di Fulvio', oeuvre: 'Le Gang des rêves', image: lucaDiFulvio },
   { auteur: 'Joyce Maynard', oeuvre: 'Et devant moi, le monde', image: devantMoiLeMonde },
   { auteur: 'Margarete Buber-Neumann', oeuvre: 'Milena', image: milena },

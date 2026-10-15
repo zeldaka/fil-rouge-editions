@@ -124,7 +124,8 @@ const { theme } = Astro.props;
   .theme__cover {
     width: 100%;
     aspect-ratio: 2 / 3;
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--color-card-bg);
     border-radius: 8px;
     box-shadow: 0 6px 16px rgba(41, 38, 36, 0.14);
     margin-bottom: 10px;
