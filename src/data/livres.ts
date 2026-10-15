@@ -2,55 +2,59 @@
 // Couvertures et liens récupérés depuis Books'nJoy (booksnjoy.com) — ne pas
 // inventer de livres, toute nouvelle entrée doit être validée par Audrey.
 
-import apeirogon from '../assets/livres/apeirogon.jpeg';
+import apeirogon from '../assets/livres/apeirogon.jpg';
 import bernardMalamudKiev from '../assets/influences/bernard-malamud.jpg';
 import artDePerdre from '../assets/livres/art-de-perdre.jpg';
-import chansonLafon from '../assets/livres/chanson-lafon.jpeg';
+import chansonLafon from '../assets/livres/chanson-lafon.jpg';
 import corpsEtAme from '../assets/livres/corps-et-ame.jpeg';
-import cygnesSauvages from '../assets/livres/cygnes-sauvages.jpeg';
+import cygnesSauvages from '../assets/livres/cygnes-sauvages.jpg';
 import devantMoiLeMonde from '../assets/livres/devant-moi-le-monde.jpeg';
 import educationEuropeenne from '../assets/livres/education-europeenne.jpg';
 import enfantDeSalaud from '../assets/livres/enfant-de-salaud.jpg';
-import enfantsOppermann from '../assets/livres/enfants-oppermann.jpeg';
+import enfantsOppermann from '../assets/livres/enfants-oppermann.jpg';
 import estEden from '../assets/livres/est-eden.jpg';
-import etreSansDestin from '../assets/livres/etre-sans-destin.jpeg';
+import etreSansDestin from '../assets/livres/etre-sans-destin.jpg';
 import familleKarnovski from '../assets/livres/famille-karnovski.jpg';
 import familleMoskat from '../assets/livres/famille-moskat.jpeg';
+import familleRosenthal from '../assets/livres/famille-rosenthal.jpg';
 import femmeFuyantAnnonce from '../assets/livres/femme-fuyant-annonce.jpg';
-import finHommeRouge from '../assets/livres/fin-homme-rouge.jpeg';
+import finHommeRouge from '../assets/livres/fin-homme-rouge.jpg';
 import freresAshkenazi from '../assets/livres/freres-ashkenazi.jpg';
-import freresK from '../assets/livres/freres-k.jpeg';
+import freresK from '../assets/livres/freres-k.jpg';
 import freresLehman from '../assets/livres/freres-lehman.jpg';
 import gangDesReves from '../assets/livres/gang-des-reves.jpeg';
 import gensHeureux from '../assets/livres/gens-heureux.jpg';
 import grandesFamilles from '../assets/livres/grandes-familles.jpg';
 import hamnet from '../assets/livres/hamnet.jpg';
+import histoireAllemand from '../assets/livres/histoire-allemand.jpg';
 import huitiemeVie from '../assets/livres/huitieme-vie.jpg';
-import juifErrant from '../assets/livres/juif-errant.jpeg';
-import leCommis from '../assets/livres/le-commis.jpeg';
-import lelu from '../assets/livres/lelu.jpeg';
+import juifErrant from '../assets/livres/juif-errant.jpg';
+import leCommis from '../assets/livres/le-commis.webp';
+import lelu from '../assets/livres/lelu.jpg';
 import lesDisparus from '../assets/livres/les-disparus.jpeg';
+import lesEffinger from '../assets/livres/les-effinger.jpg';
+import lesSemeuses from '../assets/livres/les-semeuses.jpg';
 import lilasRouge from '../assets/livres/lilas-rouge.jpg';
 import mainsDuMiracle from '../assets/livres/mains-du-miracle.jpg';
 import martinEden from '../assets/livres/martin-eden.jpeg';
 import melnitz from '../assets/livres/melnitz.jpeg';
 import mereCommeLesAutres from '../assets/livres/mere-comme-les-autres.jpg';
 import milena from '../assets/livres/milena.jpeg';
-import mortDunPere from '../assets/livres/mort-dun-pere.jpeg';
+import mortDunPere from '../assets/livres/mort-dun-pere.jpg';
 import ombreDuVent from '../assets/livres/ombre-du-vent.jpeg';
 import ombresHudson from '../assets/livres/ombres-hudson.jpg';
 import ordreDuJour from '../assets/livres/ordre-du-jour.jpg';
-import ouestRienNouveau from '../assets/livres/ouest-rien-nouveau.jpeg';
-import plusGrandsMonde from '../assets/livres/plus-grands-monde.jpeg';
+import ouestRienNouveau from '../assets/livres/ouest-rien-nouveau.jpg';
 import portraitMariage from '../assets/livres/portrait-mariage.jpg';
-import poussiereVent from '../assets/livres/poussiere-vent.jpeg';
+import poussiereVent from '../assets/livres/poussiere-vent.jpg';
 import princeDesMarees from '../assets/livres/prince-des-marees.jpeg';
 import raisinsColere from '../assets/livres/raisins-colere.jpg';
+import retourLemberg from '../assets/livres/retour-lemberg.jpg';
 import sacDeBilles from '../assets/livres/sac-de-billes.jpg';
 import seulDansBerlin from '../assets/livres/seul-dans-berlin.jpg';
-import tanguy from '../assets/livres/tanguy.jpeg';
+import tanguy from '../assets/livres/tanguy.webp';
 import tenebres from '../assets/livres/tenebres.jpeg';
-import terrePromise from '../assets/livres/terre-promise.jpeg';
+import terrePromise from '../assets/livres/terre-promise.jpg';
 import uneEducation from '../assets/livres/une-education.jpeg';
 import uneOdyssee from '../assets/livres/une-odyssee.jpg';
 import vieBouleversee from '../assets/livres/vie-bouleversee.jpeg';
@@ -72,6 +76,18 @@ export const thematiques: ThematiqueLecture[] = [
   {
     titre: "Sagas familiales",
     livres: [
+      {
+        titre: "Les Effinger",
+        auteur: "Gabriele Tergit",
+        presentation: "Une famille berlinoise sur plusieurs générations, de la Belle Époque à l'ombre montante du nazisme — une fresque retrouvée après des décennies d'oubli.",
+        couverture: lesEffinger,
+      },
+      {
+        titre: "Les semeuses",
+        auteur: "Diane Wilson",
+        presentation: "Cinq générations de femmes dakotas, une terre volée et une mémoire à reconquérir, fil après fil.",
+        couverture: lesSemeuses,
+      },
       {
         titre: "La huitième vie",
         auteur: "Nino Haratischwili",
@@ -168,6 +184,12 @@ export const thematiques: ThematiqueLecture[] = [
   {
     titre: "Récits de filiation",
     livres: [
+      {
+        titre: "Retour à Lemberg",
+        auteur: "Philippe Sands",
+        presentation: "Une enquête juridique et familiale entremêlée, sur les traces de deux hommes qui ont inventé le droit international face aux mêmes crimes.",
+        couverture: retourLemberg,
+      },
       {
         titre: "Les Disparus",
         auteur: "Daniel Mendelsohn",
@@ -366,6 +388,12 @@ export const thematiques: ThematiqueLecture[] = [
     titre: "La grande Histoire",
     livres: [
       {
+        titre: "Histoire d'un allemand",
+        auteur: "Sebastian Haffner",
+        presentation: "Le récit, de l'intérieur, de la bascule d'un pays vers le nazisme — comment une société ordinaire en vient à basculer, jour après jour.",
+        couverture: histoireAllemand,
+      },
+      {
         titre: "Les Disparus",
         auteur: "Daniel Mendelsohn",
         presentation: "Une enquête familiale minutieuse pour redonner un visage à six proches engloutis par la Shoah — l'art de la biographie comme acte de justice.",
@@ -483,6 +511,12 @@ export const thematiques: ThematiqueLecture[] = [
     titre: "La famille dans tous ses états",
     livres: [
       {
+        titre: "La famille Rosenthal",
+        auteur: "Toby Lloyd",
+        presentation: "Trois générations d'une même famille, racontées avec un humour noir féroce — ce qui se répète, ce qui se transforme, ce qui finit par exploser.",
+        couverture: familleRosenthal,
+      },
+      {
         titre: "Où vivaient les gens heureux",
         auteur: "Joyce Maynard",
         presentation: "La tentative maladroite et émouvante d'une mère de reconstruire le foyer aimant qu'elle n'a jamais connu.",
@@ -502,13 +536,6 @@ export const thematiques: ThematiqueLecture[] = [
         presentation: "S'arracher à sa famille pour exister par soi-même, puis revenir l'écrire : un témoignage puissant sur la part qu'on garde, malgré tout, de son enfance.",
         couverture: uneEducation,
         lien: "https://www.booksnjoy.com/une-education-tara-westover-recit-emancipation-femme/",
-      },
-      {
-        titre: "Plus grands que le monde",
-        auteur: "Meredith Hall",
-        presentation: "Une famille américaine au défi de la tragédie, dans une ferme du Maine qui a tout vu et tout encaissé.",
-        couverture: plusGrandsMonde,
-        lien: "https://www.booksnjoy.com/plus-grands-que-le-monde-meredith-hall-saga-familiale-amerique/",
       },
       {
         titre: "La famille Moskat",
