@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Thread from '../components/Thread.astro';
 import InstagramIcon from '../components/InstagramIcon.astro';
 import InstagramCarousel from '../components/InstagramCarousel.astro';
+import { Image } from 'astro:assets';
 import { siteConfig } from '../data/config';
 import { thematiques } from '../data/livres';
 
@@ -67,11 +68,38 @@ const instagramUrl = siteConfig.instagramHandle
       <div class="container">
         <h2>Conseils de lecture</h2>
 
-        <div class="conseils__grid">
+        <div class="conseils__list">
           {thematiques.map((theme) => (
-            <div class="card conseils__card">
+            <div class="conseils__theme">
               <h3>{theme.titre}</h3>
-              <p class="conseils__empty">Sélection à venir.</p>
+              {theme.livres.length === 0 ? (
+                <p class="conseils__empty">Sélection à venir.</p>
+              ) : (
+                <div class="conseils__shelf">
+                  {theme.livres.map((livre) => {
+                    const Wrapper = livre.lien ? 'a' : 'div';
+                    const wrapperProps = livre.lien
+                      ? { href: livre.lien, target: '_blank', rel: 'noopener noreferrer' }
+                      : {};
+                    return (
+                      <Wrapper class="conseils__book" {...wrapperProps}>
+                        {livre.couverture && (
+                          <Image
+                            src={livre.couverture}
+                            alt={`Couverture de ${livre.titre}`}
+                            width={160}
+                            height={240}
+                            class="conseils__cover"
+                          />
+                        )}
+                        <p class="conseils__book-titre">{livre.titre}</p>
+                        <p class="conseils__book-auteur">{livre.auteur}</p>
+                        <p class="conseils__book-presentation">{livre.presentation}</p>
+                      </Wrapper>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -157,24 +185,71 @@ const instagramUrl = siteConfig.instagramHandle
     margin-bottom: var(--space-4);
   }
 
-  .conseils__grid {
+  .conseils__list {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-    align-items: stretch;
-  }
-
-  .conseils__card {
     display: flex;
     flex-direction: column;
-    min-height: 140px;
+    gap: var(--space-5);
+  }
+
+  .conseils__theme h3 {
+    margin-bottom: 14px;
   }
 
   .conseils__empty {
-    margin-top: 10px;
     color: var(--color-ink-soft);
     font-size: 0.95rem;
+  }
+
+  .conseils__shelf {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .conseils__book {
+    flex: 0 0 auto;
+    width: 170px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    scroll-snap-align: start;
+  }
+
+  .conseils__cover {
+    width: 170px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(41, 38, 36, 0.14);
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .conseils__book:hover .conseils__cover {
+    transform: translateY(-3px);
+  }
+
+  .conseils__book-titre {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .conseils__book-auteur {
+    color: var(--color-ink-muted);
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+
+  .conseils__book-presentation {
+    color: var(--color-ink-soft);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-top: 6px;
   }
 </style>

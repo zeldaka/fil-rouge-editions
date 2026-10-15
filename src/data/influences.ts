@@ -27,6 +27,8 @@ import danielMendelsohn from '../assets/influences/daniel-mendelsohn.jpeg';
 import anneBerest from '../assets/influences/anne-berest.jpg';
 import umbertoEco from '../assets/influences/umberto-eco.jpg';
 import lucaDiFulvio from '../assets/influences/luca-di-fulvio.jpg';
+import devantMoiLeMonde from '../assets/influences/devant-moi-le-monde.jpeg';
+import milena from '../assets/influences/milena.jpeg';
 
 export interface Influence {
   auteur: string;
@@ -58,5 +60,7 @@ export const influences: Influence[] = [
   { auteur: 'Richard Powers', oeuvre: 'Le Temps où nous chantions', image: richardPowers },
   { auteur: 'Umberto Eco', oeuvre: 'Le Nom de la rose', image: umbertoEco },
   { auteur: 'Luca Di Fulvio', oeuvre: 'Le Gang des rêves', image: lucaDiFulvio },
+  { auteur: 'Joyce Maynard', oeuvre: 'Et devant moi, le monde', image: devantMoiLeMonde },
+  { auteur: 'Margarete Buber-Neumann', oeuvre: 'Milena', image: milena },
   { auteur: 'Israël Joshua Singer', oeuvre: 'La Famille Karnovski', image: israelJoshuaSinger },
 ];
