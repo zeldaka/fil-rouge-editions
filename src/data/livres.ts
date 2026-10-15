@@ -69,12 +69,14 @@ export interface Livre {
 
 export interface ThematiqueLecture {
   titre: string;
+  slug: string;
   livres: Livre[];
 }
 
 export const thematiques: ThematiqueLecture[] = [
   {
     titre: "Sagas familiales",
+    slug: "sagas-familiales",
     livres: [
       {
         titre: "Les Effinger",
@@ -183,6 +185,7 @@ export const thematiques: ThematiqueLecture[] = [
   },
   {
     titre: "Récits de filiation",
+    slug: "recits-de-filiation",
     livres: [
       {
         titre: "Retour à Lemberg",
@@ -222,6 +225,7 @@ export const thematiques: ThematiqueLecture[] = [
   },
   {
     titre: "Parcours de vie inspirants et destins individuels",
+    slug: "parcours-de-vie",
     livres: [
       {
         titre: "L'Homme de Kiev",
@@ -332,6 +336,7 @@ export const thematiques: ThematiqueLecture[] = [
   },
   {
     titre: "Exils et racines",
+    slug: "exils-et-racines",
     livres: [
       {
         titre: "Le Juif errant est arrivé",
@@ -386,6 +391,7 @@ export const thematiques: ThematiqueLecture[] = [
   },
   {
     titre: "La grande Histoire",
+    slug: "la-grande-histoire",
     livres: [
       {
         titre: "Histoire d'un allemand",
@@ -509,6 +515,7 @@ export const thematiques: ThematiqueLecture[] = [
   },
   {
     titre: "La famille dans tous ses états",
+    slug: "famille-tous-etats",
     livres: [
       {
         titre: "La famille Rosenthal",

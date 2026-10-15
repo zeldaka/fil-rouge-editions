@@ -1,0 +1,157 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ThemeIllustration from '../../components/ThemeIllustration.astro';
+import { Image } from 'astro:assets';
+import { thematiques } from '../../data/livres';
+
+export function getStaticPaths() {
+  return thematiques.map((theme) => ({
+    params: { slug: theme.slug },
+    props: { theme },
+  }));
+}
+
+const { theme } = Astro.props;
+---
+
+<Layout
+  title={`Conseils de lecture · ${theme.titre}`}
+  description={`Une sélection de livres sur le thème "${theme.titre}", par Audrey Klein (Books'nJoy).`}
+>
+  <section class="section theme">
+    <div class="container">
+      <a class="theme__back" href="/critiques-litteraires/">← Conseils de lecture</a>
+
+      <div class="theme__header">
+        <div class="theme__illu">
+          <ThemeIllustration slug={theme.slug} color="var(--accent-critiques)" />
+        </div>
+        <h1>{theme.titre}</h1>
+      </div>
+
+      {theme.livres.length === 0 ? (
+        <p class="theme__empty">Sélection à venir.</p>
+      ) : (
+        <div class="theme__grid">
+          {theme.livres.map((livre) => {
+            const Wrapper = livre.lien ? 'a' : 'div';
+            const wrapperProps = livre.lien
+              ? { href: livre.lien, target: '_blank', rel: 'noopener noreferrer' }
+              : {};
+            return (
+              <Wrapper class="theme__book" {...wrapperProps}>
+                {livre.couverture && (
+                  <Image
+                    src={livre.couverture}
+                    alt={`Couverture de ${livre.titre}`}
+                    width={240}
+                    height={360}
+                    class="theme__cover"
+                  />
+                )}
+                <p class="theme__book-titre">{livre.titre}</p>
+                <p class="theme__book-auteur">{livre.auteur}</p>
+                <p class="theme__book-presentation">{livre.presentation}</p>
+              </Wrapper>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .theme {
+    --section-color: var(--accent-critiques);
+  }
+
+  .theme__back {
+    display: inline-block;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .theme__back:hover {
+    text-decoration: underline;
+  }
+
+  .theme__header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: var(--space-5);
+  }
+
+  .theme__illu {
+    width: 72px;
+    height: 72px;
+    flex: 0 0 auto;
+    background: color-mix(in srgb, var(--accent-critiques) 16%, white);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme__illu svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .theme__header h1 {
+    margin: 0;
+  }
+
+  .theme__empty {
+    color: var(--color-ink-soft);
+  }
+
+  .theme__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 28px 20px;
+  }
+
+  .theme__book {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .theme__cover {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(41, 38, 36, 0.14);
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .theme__book:hover .theme__cover {
+    transform: translateY(-3px);
+  }
+
+  .theme__book-titre {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .theme__book-auteur {
+    color: var(--color-ink-muted);
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+
+  .theme__book-presentation {
+    color: var(--color-ink-soft);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-top: 6px;
+  }
+</style>
