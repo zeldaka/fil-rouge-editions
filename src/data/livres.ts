@@ -3,6 +3,7 @@
 // inventer de livres, toute nouvelle entrée doit être validée par Audrey.
 
 import apeirogon from '../assets/livres/apeirogon.jpeg';
+import bernardMalamudKiev from '../assets/influences/bernard-malamud.jpg';
 import artDePerdre from '../assets/livres/art-de-perdre.jpg';
 import chansonLafon from '../assets/livres/chanson-lafon.jpeg';
 import corpsEtAme from '../assets/livres/corps-et-ame.jpeg';
@@ -200,6 +201,13 @@ export const thematiques: ThematiqueLecture[] = [
   {
     titre: "Parcours de vie inspirants et destins individuels",
     livres: [
+      {
+        titre: "L'Homme de Kiev",
+        auteur: "Bernard Malamud",
+        presentation: "Un innocent broyé par un procès fabriqué de toutes pièces dans la Russie tsariste — la résistance d'un homme seul face à l'arbitraire.",
+        couverture: bernardMalamudKiev,
+        lien: "https://www.booksnjoy.com/homme-kiev-bernard-malamud-prix-pulitzer-1967/",
+      },
       {
         titre: "Une éducation",
         auteur: "Tara Westover",
