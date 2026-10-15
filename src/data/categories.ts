@@ -8,12 +8,21 @@ export interface Category {
 
 export const categories: Category[] = [
   {
+    title: 'Biographie romancée',
+    description:
+      'Votre vie racontée comme un roman : des scènes, une voix, un souffle. Fidèle à votre parole, écrite comme une œuvre littéraire.',
+  },
+  {
     title: 'Biographies familiales',
     description: 'Histoires familiales, mémoire intergénérationnelle, transmission.',
   },
   {
     title: 'Biographies personnelles',
     description: 'Parcours, trajectoires, choix, moments fondateurs.',
+  },
+  {
+    title: 'Un moment de vie',
+    description: 'Un épisode choisi et raconté : une rencontre, un départ, un exil.',
   },
   {
     title: 'Récits de vie et mémoires',

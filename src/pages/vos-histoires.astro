@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Thread from '../components/Thread.astro';
 import { categories } from '../data/categories';
+
+const featured = categories.find((cat) => cat.title === 'Biographie romancée');
+const otherCategories = categories.filter((cat) => cat.title !== 'Biographie romancée');
 ---
 
 <Layout
@@ -15,8 +18,16 @@ import { categories } from '../data/categories';
     <div class="container">
       <h1>Vos histoires</h1>
 
+      {featured && (
+        <div class="histoires__featured">
+          <span class="histoires__featured-badge">✦ Ce qui nous rend unique</span>
+          <h2>{featured.title}</h2>
+          {featured.description && <p>{featured.description}</p>}
+        </div>
+      )}
+
       <div class="histoires__grid">
-        {categories.map((cat) => (
+        {otherCategories.map((cat) => (
           <div class="card histoires__card">
             <h3>{cat.title}</h3>
             {cat.description && <p>{cat.description}</p>}
@@ -56,6 +67,41 @@ import { categories } from '../data/categories';
     position: relative;
     z-index: 1;
     margin-bottom: var(--space-4);
+  }
+
+  .histoires__featured {
+    position: relative;
+    z-index: 1;
+    background: var(--color-card-bg);
+    border: 1.5px solid var(--accent-accueil);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+    margin-bottom: 24px;
+  }
+
+  .histoires__featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: color-mix(in srgb, var(--accent-accueil) 15%, white);
+    color: var(--accent-accueil);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 14px;
+  }
+
+  .histoires__featured h2 {
+    margin-bottom: 10px;
+  }
+
+  .histoires__featured p {
+    color: var(--color-ink-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 640px;
   }
 
   .histoires__grid {
