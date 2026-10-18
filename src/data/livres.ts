@@ -225,7 +225,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "La Promesse de l'aube",
         auteur: "Romain Gary",
-        presentation: "L'amour démesuré d'une mère pour son fils, et la promesse qu'il devra tenir toute sa vie — l'un des plus beaux récits de filiation de la littérature française.",
+        presentation: "Le plus beau roman de filiation jamais écrit, le chant d'amour de Romain Gary à sa mère et une fin à pleurer.",
         couverture: promesseAube,
       },
     ],
