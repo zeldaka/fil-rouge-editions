@@ -60,6 +60,8 @@ import terrePromise from '../assets/livres/terre-promise.jpg';
 import uneEducation from '../assets/livres/une-education.jpeg';
 import uneOdyssee from '../assets/livres/une-odyssee.jpg';
 import vieBouleversee from '../assets/livres/vie-bouleversee.jpeg';
+import undergroundRailroad from '../assets/livres/underground-railroad.jpg';
+import lysDeBrooklyn from '../assets/livres/lys-de-brooklyn.jpeg';
 
 export interface Livre {
   titre: string;
@@ -89,7 +91,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Les semeuses",
         auteur: "Diane Wilson",
-        presentation: "Cinq générations de femmes dakotas, une terre volée et une mémoire à reconquérir, fil après fil.",
+        presentation: "Premier roman très réussi de l'autrice américaine d'origine autochtone Diane Wilson, Les semeuses s'inscrit dans la tradition des sagas familiales ; on y suit cinq générations de femmes indiennes de la tribu dakota. Il y est question de transmission, de quête identitaire et de réappropriation culturelle par le biais de mystérieuses graines sauvées du désastre et passées de main en main.",
         couverture: lesSemeuses,
       },
       {
@@ -116,7 +118,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Melnitz",
         auteur: "Charles Lewinsky",
-        presentation: "Saga familiale monumentale, où les portes s'ouvrent sur des inconnus et se claquent sur des rancœurs tenaces, que seule la promiscuité familiale favorise à un tel degré d'intensité. Dans la veine des grandes fresques romanesques faisant s'entrelacer la petite et la grande histoire, rendant compte des tragédies personnelles à l'aune des événements politiques, Melnitz retrace 75 ans de la vie d'une famille juive de 1871 à 1945 en République helvétique.",
+        presentation: "Saga familiale monumentale, où les portes s'ouvrent sur des inconnus et se claquent sur des rancœurs tenaces. Melnitz retrace 75 ans de la vie d'une famille juive de 1871 à 1945 en République helvétique.",
         couverture: melnitz,
         lien: "https://www.booksnjoy.com/melnitz-charles-lewinsky-saga-familiale-judaisme-suisse/",
       },
@@ -144,7 +146,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "L'ombre du vent",
         auteur: "Carlos Ruiz Zafón",
-        presentation: "Écrivain espagnol le plus traduit après Cervantès, Carlos Ruiz Zafón tisse un roman initiatique fabuleux à mi-chemin entre le polar littéraire, le drame historique aux influences gothiques et fantastiques, avec pour toile de fond l'Espagne franquiste. Un grand roman populaire dont les pages défilent au rythme des rebondissements et des retournements de situation.",
+        presentation: "Écrivain espagnol le plus traduit après Cervantès, Carlos Ruiz Zafón tisse un roman initiatique fabuleux à mi-chemin entre le polar littéraire, le drame historique aux influences gothiques et fantastiques avec pour toile de fond l'Espagne franquiste. À l'image de leur ville, ses personnages sont tissés de brumes et de secrets, de mensonges et de crimes dissimulés dans les replis du temps. Distillant le suspense à la manière des feuilletonistes du 19e, Carlos Ruiz Zafón éblouit par sa maîtrise de l'art romanesque, jusqu'à l'ultime révélation. Du grand art !",
         couverture: ombreDuVent,
         lien: "https://www.booksnjoy.com/livres-a-lire-au-moins-une-fois-dans-sa-vie-lombre-du-vent-carlos-ruiz-zafon-livre-culte/",
       },
@@ -198,7 +200,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Retour à Lemberg",
         auteur: "Philippe Sands",
-        presentation: "Une enquête juridique et familiale entremêlée, sur les traces de deux hommes qui ont inventé le droit international face aux mêmes crimes.",
+        presentation: "Génocide, crime contre l'humanité : que revêtent ces termes ? De quoi parle-t-on vraiment ? Philippe Sands mène l'enquête sur la genèse de ces concepts, tout en explorant l'histoire de sa famille. Tous les chemins mènent à Lemberg…",
         couverture: retourLemberg,
       },
       {
@@ -401,6 +403,12 @@ export const thematiques: ThematiqueLecture[] = [
         couverture: leCommis,
         lien: "https://www.booksnjoy.com/le-commis-bernard-malamud/",
       },
+      {
+        titre: "Le Lys de Brooklyn",
+        auteur: "Betty Smith",
+        presentation: "Brooklyn encore et toujours. La misère, l'émigration, une femme qui ne lâche rien et force son destin, l'amour, des personnages pétulants terriblement attachants. À la fois nostalgique, pétillant et porteur d'espoir, voici un très beau roman d'apprentissage d'une fraîcheur qui fait du bien.",
+        couverture: lysDeBrooklyn,
+      },
     ],
   },
   {
@@ -408,9 +416,9 @@ export const thematiques: ThematiqueLecture[] = [
     slug: "la-grande-histoire",
     livres: [
       {
-        titre: "Histoire d'un allemand",
+        titre: "Histoire d'un Allemand",
         auteur: "Sebastian Haffner",
-        presentation: "Le récit, de l'intérieur, de la bascule d'un pays vers le nazisme — comment une société ordinaire en vient à basculer, jour après jour.",
+        presentation: "Publiée à titre posthume, cette chronique intime, écrite au cœur du IIIe Reich allemand, retrace étape par étape la montée du nazisme. Pendant 60 ans, le manuscrit resta caché dans le bureau de Sebastian Haffner. Ce trésor a entre autres mérites celui de replacer le vécu individuel au centre de l'histoire — donc de faire de l'homme un acteur de son destin — en vue de répondre à cette question qui demeure en suspens : « où sont donc passés les Allemands ? »",
         couverture: histoireAllemand,
       },
       {
@@ -486,7 +494,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Melnitz",
         auteur: "Charles Lewinsky",
-        presentation: "Saga familiale monumentale, où les portes s'ouvrent sur des inconnus et se claquent sur des rancœurs tenaces, que seule la promiscuité familiale favorise à un tel degré d'intensité. Dans la veine des grandes fresques romanesques faisant s'entrelacer la petite et la grande histoire, rendant compte des tragédies personnelles à l'aune des événements politiques, Melnitz retrace 75 ans de la vie d'une famille juive de 1871 à 1945 en République helvétique.",
+        presentation: "Saga familiale monumentale, où les portes s'ouvrent sur des inconnus et se claquent sur des rancœurs tenaces. Melnitz retrace 75 ans de la vie d'une famille juive de 1871 à 1945 en République helvétique.",
         couverture: melnitz,
         lien: "https://www.booksnjoy.com/melnitz-charles-lewinsky-saga-familiale-judaisme-suisse/",
       },
@@ -524,6 +532,12 @@ export const thematiques: ThematiqueLecture[] = [
         presentation: "Éric Vuillard se saisit d'un moment de l'Histoire qu'il décortique, démystifie à l'aide d'une plume incisive comme un scalpel. L'ordre du jour fait référence aux années 30, celles qui ont précédé la Seconde Guerre mondiale, période pendant laquelle la machine infernale allemande se met en branle en se nourrissant de la faiblesse humaine.",
         couverture: ordreDuJour,
         lien: "https://www.booksnjoy.com/ordre-jour-eric-vuillard-goncourt/",
+      },
+      {
+        titre: "Underground Railroad",
+        auteur: "Colson Whitehead",
+        presentation: "Prix Pulitzer 2017 mérité ! Cora, 16 ans, esclave dans une plantation de coton en Géorgie, s'échappe en montant dans un train souterrain fantôme qui traverse les États-Unis du Sud esclavagiste au Nord libre. Une course-poursuite haletante, portée par une femme déterminée à reconquérir sa liberté.",
+        couverture: undergroundRailroad,
       },
     ],
   },

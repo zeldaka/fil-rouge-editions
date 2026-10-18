@@ -88,8 +88,20 @@ const { theme } = Astro.props;
 
   .theme__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 52px 36px;
+  }
+
+  @media (max-width: 760px) {
+    .theme__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .theme__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .theme__book {
