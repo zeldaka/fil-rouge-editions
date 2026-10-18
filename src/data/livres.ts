@@ -63,11 +63,12 @@ import vieBouleversee from '../assets/livres/vie-bouleversee.jpeg';
 import undergroundRailroad from '../assets/livres/underground-railroad.jpg';
 import lysDeBrooklyn from '../assets/livres/lys-de-brooklyn.jpeg';
 import johnFilsDeJohn from '../assets/livres/john-fils-de-john.jpg';
+import cartePostale from '../assets/livres/carte-postale.jpg';
 
 export interface Livre {
   titre: string;
   auteur: string;
-  presentation: string;
+  presentation?: string;
   couverture?: ImageMetadata;
   lien?: string;
 }
@@ -244,6 +245,11 @@ export const thematiques: ThematiqueLecture[] = [
         presentation: "Avec une économie de mots, la plume tout en retenue de Douglas Stuart, qui a pour effet d'accentuer l'extrême sensibilité des portraits, tisse un roman initiatique en huis clos poignant. Sans pour autant la justifier, Douglas Stuart explore les motifs de la violence des pères empêtrés dans leurs mensonges et tétanisés par les non-dits, tout en soulignant l'injustice qu'il y a pour les fils à subir leur tyrannie. Grand roman sur les rapports de pouvoir au sein des familles et sur l'incapacité à dire je t'aime, John, fils de John est un des plus beaux récits de filiation qui soient.",
         couverture: johnFilsDeJohn,
       },
+      {
+        titre: "La Carte postale",
+        auteur: "Anne Berest",
+        couverture: cartePostale,
+      },
     ],
   },
   {
@@ -295,7 +301,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Le gang des rêves",
         auteur: "Luca Di Fulvio",
-        presentation: "« Le garçon fit un pas hésitant en avant, se détachant de la foule, alors que désormais il était trop tard et qu'ils ne pouvaient plus rien se dire. Mais leurs regards se mêlaient, et dans ces yeux voilés de larmes, il y avait plus de mots qu'ils n'auraient jamais pu prononcer, plus d'amour qu'ils n'auraient pu montrer. »",
+        presentation: "À mi-chemin entre David Copperfield et Les affranchis, Le gang des rêves est une fresque sociale en clair-obscur dépeignant le New York des années 20, le quotidien des immigrés juifs et italiens, les Noirs ghettoïsés, dans une ville aux mains des parrains du crime organisé, avec pour fil rouge une histoire d'amour impossible entre deux adolescents. Un jeune wop et une riche juive des beaux quartiers. Deux amants que les circonstances de leur rencontre empêchent de s'aimer. Tous les codes de la success-story américaine et du roman d'apprentissage sont présents et font du Gang des rêves un vrai page-turner.",
         couverture: gangDesReves,
         lien: "https://www.booksnjoy.com/le-gang-des-reves-luca-di-fulvio-gangs-of-new-york/",
       },

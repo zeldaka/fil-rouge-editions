@@ -47,7 +47,7 @@ const { theme } = Astro.props;
                 )}
                 <p class="theme__book-titre">{livre.titre}</p>
                 <p class="theme__book-auteur">{livre.auteur}</p>
-                <p class="theme__book-presentation">{livre.presentation}</p>
+                {livre.presentation && <p class="theme__book-presentation">{livre.presentation}</p>}
               </Wrapper>
             );
           })}
