@@ -2,7 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { thematiques } from '../../data/livres';
-import { illustrations } from '../../data/illustrations';
 
 export function getStaticPaths() {
   return thematiques.map((theme) => ({
@@ -21,10 +20,6 @@ const { theme } = Astro.props;
   <section class="section theme">
     <div class="container">
       <a class="theme__back" href="/critiques-litteraires/">← Conseils de lecture</a>
-
-      <div class="theme__banner">
-        <Image src={illustrations[theme.slug]} alt="" width={1260} height={420} />
-      </div>
 
       <div class="theme__header">
         <h1>{theme.titre}</h1>
@@ -77,20 +72,6 @@ const { theme } = Astro.props;
 
   .theme__back:hover {
     text-decoration: underline;
-  }
-
-  .theme__banner {
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    margin-bottom: var(--space-4);
-  }
-
-  .theme__banner :global(img) {
-    width: 100%;
-    height: auto;
-    max-height: 320px;
-    object-fit: cover;
-    display: block;
   }
 
   .theme__header {
