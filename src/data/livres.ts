@@ -337,7 +337,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Être sans destin",
         auteur: "Imre Kertész",
-        presentation: "L'écrivain hongrois Imre Kertész relate dans ce roman autobiographique bouleversant sa déportation en 1944 à Auschwitz, son transfert à Buchenwald, le quotidien au sein du camp, puis sa libération un an plus tard.",
+        presentation: "L'écrivain hongrois Imre Kertész relate dans ce roman autobiographique bouleversant sa déportation en 1944 à Auschwitz, son transfert à Buchenwald, le quotidien au sein du camp, puis sa libération un an plus tard. Être sans destin est le fruit de 13 années à chercher comment trouver le ton juste pour exprimer l'indicible. Le résultat est un texte absolument indispensable, rendu lumineux par le désir de vivre de son auteur, revenu d'entre les morts, soulevant des questionnements intellectuels et philosophiques capitaux avec une honnêteté déconcertante et une profondeur éblouissante. Il a reçu le prix Nobel de littérature en 2002.",
         couverture: etreSansDestin,
         lien: "https://www.booksnjoy.com/etre-sans-destin-imre-kertesz-prix-nobel-litterature-hongrie-2002/",
       },
