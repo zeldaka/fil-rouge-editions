@@ -274,7 +274,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Les mains du miracle",
         auteur: "Joseph Kessel",
-        presentation: "La vie de ce docteur finlandais, devenu médecin particulier de Himmler pendant quatre ans et demi, est une matière brute formidable pour un romancier aussi doué que Joseph Kessel, un conteur né.",
+        presentation: "Les mains du miracle est une mine d'or pour qui aime les destins d'exception. La vie de ce docteur finlandais, devenu médecin particulier de Himmler pendant quatre ans et demi, est une matière brute formidable pour un romancier aussi doué que Joseph Kessel, un conteur né. Tous les faits évoqués dans le roman ont été vérifiés : Joseph Kessel fait d'une histoire vraie une œuvre romanesque vertigineuse.",
         couverture: mainsDuMiracle,
         lien: "https://www.booksnjoy.com/les-mains-du-miracle-joseph-kessel/",
       },
@@ -323,7 +323,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "L'élu",
         auteur: "Chaïm Potok",
-        presentation: "Alors que les Alliés sont sur le point de débarquer, à Brooklyn dans le quartier juif de Williamsburg, deux équipes d'élèves de Yeshivas, sous couvert d'une partie de base-ball, se livrent un duel idéologique enragé, se soldant par un œil poché et une nouvelle amitié.",
+        presentation: "À travers le conflit moral auquel est confronté l'héritier d'une dynastie rabbinique et les secrets d'une éducation stricte, Chaïm Potok souligne l'antagonisme entre individualisme et judaïsme sectaire, et la douloureuse construction identitaire lorsqu'on vit en autarcie dans une communauté fermée. Introduction passionnante à la mystique juive, L'élu est un magnifique roman d'amitié se déroulant dans les milieux orthodoxes new-yorkais divisés par l'événement tant attendu par le « peuple élu ».",
         couverture: lelu,
         lien: "https://www.booksnjoy.com/lelu-chaim-potok-histoire-amitie-juifs-hassidiques-new-york/",
       },
