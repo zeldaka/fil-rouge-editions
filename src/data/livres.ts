@@ -48,6 +48,7 @@ import ouestRienNouveau from '../assets/livres/ouest-rien-nouveau.jpg';
 import portraitMariage from '../assets/livres/portrait-mariage.jpg';
 import poussiereVent from '../assets/livres/poussiere-vent.jpg';
 import promesseAube from '../assets/livres/promesse-aube.jpg';
+import tempsNousChantions from '../assets/livres/temps-nous-chantions.jpg';
 import princeDesMarees from '../assets/livres/prince-des-marees.jpeg';
 import raisinsColere from '../assets/livres/raisins-colere.jpg';
 import retourLemberg from '../assets/livres/retour-lemberg.jpg';
@@ -82,7 +83,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Les Effinger",
         auteur: "Gabriele Tergit",
-        presentation: "Une famille berlinoise sur plusieurs générations, de la Belle Époque à l'ombre montante du nazisme — une fresque retrouvée après des décennies d'oubli.",
+        presentation: "Une fresque historique foisonnante qui s'étend de 1878 à 1948 en Allemagne, embrassant deux guerres mondiales et le destin d'une famille juive prise dans la tourmente. On suit leur ascension puis la chute de cette famille d'industriels parfaitement intégrés appartenant à la haute bourgeoisie.",
         couverture: lesEffinger,
       },
       {
@@ -115,7 +116,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Melnitz",
         auteur: "Charles Lewinsky",
-        presentation: "Quatre générations d'une famille juive suisse, de 1871 à 1945 : une leçon magistrale sur ce que l'Histoire fait aux familles.",
+        presentation: "Saga familiale monumentale, où les portes s'ouvrent sur des inconnus et se claquent sur des rancœurs tenaces, que seule la promiscuité familiale favorise à un tel degré d'intensité. Dans la veine des grandes fresques romanesques faisant s'entrelacer la petite et la grande histoire, rendant compte des tragédies personnelles à l'aune des événements politiques, Melnitz retrace 75 ans de la vie d'une famille juive de 1871 à 1945 en République helvétique.",
         couverture: melnitz,
         lien: "https://www.booksnjoy.com/melnitz-charles-lewinsky-saga-familiale-judaisme-suisse/",
       },
@@ -181,6 +182,12 @@ export const thematiques: ThematiqueLecture[] = [
         presentation: "Les coulisses d'une dynastie bourgeoise française, et ce que le pouvoir fait aux liens du sang.",
         couverture: grandesFamilles,
         lien: "https://www.booksnjoy.com/grandes-familles-maurice-druon-goncourt-1948/",
+      },
+      {
+        titre: "Le Temps où nous chantions",
+        auteur: "Richard Powers",
+        presentation: "Dans les années 50 aux États-Unis, une femme afro-américaine et un réfugié juif allemand, ayant fui le nazisme, tentent de fonder une famille. Par la force de leur amour et leur passion pour la musique, qu'ils transmettent à leurs enfants, ils vont tenter d'élever leur foyer au-dessus des fractures identitaires, avant que celles-ci ne finissent par les rattraper.",
+        couverture: tempsNousChantions,
       },
     ],
   },
@@ -479,7 +486,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Melnitz",
         auteur: "Charles Lewinsky",
-        presentation: "Quatre générations d'une famille juive suisse, de 1871 à 1945 : une leçon magistrale sur ce que l'Histoire fait aux familles.",
+        presentation: "Saga familiale monumentale, où les portes s'ouvrent sur des inconnus et se claquent sur des rancœurs tenaces, que seule la promiscuité familiale favorise à un tel degré d'intensité. Dans la veine des grandes fresques romanesques faisant s'entrelacer la petite et la grande histoire, rendant compte des tragédies personnelles à l'aune des événements politiques, Melnitz retrace 75 ans de la vie d'une famille juive de 1871 à 1945 en République helvétique.",
         couverture: melnitz,
         lien: "https://www.booksnjoy.com/melnitz-charles-lewinsky-saga-familiale-judaisme-suisse/",
       },
@@ -527,7 +534,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "La famille Rosenthal",
         auteur: "Toby Lloyd",
-        presentation: "Trois générations d'une même famille, racontées avec un humour noir féroce — ce qui se répète, ce qui se transforme, ce qui finit par exploser.",
+        presentation: "Entrée magistrale en littérature pour Toby Lloyd, qui signe avec La famille Rosenthal un premier roman à suspense brillant, mêlant mysticisme juif, magie noire, traumatismes intergénérationnels liés à la Shoah et névroses familiales.",
         couverture: familleRosenthal,
       },
       {
