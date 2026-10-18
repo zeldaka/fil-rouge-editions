@@ -1,8 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ThemeIllustration from '../../components/ThemeIllustration.astro';
 import { Image } from 'astro:assets';
 import { thematiques } from '../../data/livres';
+import { illustrations } from '../../data/illustrations';
 
 export function getStaticPaths() {
   return thematiques.map((theme) => ({
@@ -22,10 +22,11 @@ const { theme } = Astro.props;
     <div class="container">
       <a class="theme__back" href="/critiques-litteraires/">← Conseils de lecture</a>
 
+      <div class="theme__banner">
+        <Image src={illustrations[theme.slug]} alt="" width={1260} height={420} />
+      </div>
+
       <div class="theme__header">
-        <div class="theme__illu">
-          <ThemeIllustration slug={theme.slug} color="var(--accent-critiques)" />
-        </div>
         <h1>{theme.titre}</h1>
       </div>
 
@@ -78,27 +79,22 @@ const { theme } = Astro.props;
     text-decoration: underline;
   }
 
+  .theme__banner {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+  }
+
+  .theme__banner :global(img) {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
   .theme__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
     margin-bottom: var(--space-5);
-  }
-
-  .theme__illu {
-    width: 72px;
-    height: 72px;
-    flex: 0 0 auto;
-    background: color-mix(in srgb, var(--accent-critiques) 16%, white);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .theme__illu svg {
-    width: 44px;
-    height: 44px;
   }
 
   .theme__header h1 {
