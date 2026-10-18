@@ -47,6 +47,7 @@ import ordreDuJour from '../assets/livres/ordre-du-jour.jpg';
 import ouestRienNouveau from '../assets/livres/ouest-rien-nouveau.jpg';
 import portraitMariage from '../assets/livres/portrait-mariage.jpg';
 import poussiereVent from '../assets/livres/poussiere-vent.jpg';
+import promesseAube from '../assets/livres/promesse-aube.jpg';
 import princeDesMarees from '../assets/livres/prince-des-marees.jpeg';
 import raisinsColere from '../assets/livres/raisins-colere.jpg';
 import retourLemberg from '../assets/livres/retour-lemberg.jpg';
@@ -220,6 +221,12 @@ export const thematiques: ThematiqueLecture[] = [
         presentation: "Le récit d'une émancipation féminine talonnée par le cours de l'Histoire — comment on devient soi en dépit, ou à cause, de sa mère.",
         couverture: mereCommeLesAutres,
         lien: "https://www.booksnjoy.com/tu-nes-pas-une-mere-comme-les-autres-angelika-schrobsdorff/",
+      },
+      {
+        titre: "La Promesse de l'aube",
+        auteur: "Romain Gary",
+        presentation: "L'amour démesuré d'une mère pour son fils, et la promesse qu'il devra tenir toute sa vie — l'un des plus beaux récits de filiation de la littérature française.",
+        couverture: promesseAube,
       },
     ],
   },
