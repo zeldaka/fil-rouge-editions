@@ -62,6 +62,7 @@ import uneOdyssee from '../assets/livres/une-odyssee.jpg';
 import vieBouleversee from '../assets/livres/vie-bouleversee.jpeg';
 import undergroundRailroad from '../assets/livres/underground-railroad.jpg';
 import lysDeBrooklyn from '../assets/livres/lys-de-brooklyn.jpeg';
+import johnFilsDeJohn from '../assets/livres/john-fils-de-john.jpg';
 
 export interface Livre {
   titre: string;
@@ -237,6 +238,12 @@ export const thematiques: ThematiqueLecture[] = [
         presentation: "Le plus beau roman de filiation jamais écrit, le chant d'amour de Romain Gary à sa mère et une fin à pleurer.",
         couverture: promesseAube,
       },
+      {
+        titre: "John, fils de John",
+        auteur: "Douglas Stuart",
+        presentation: "Avec une économie de mots, la plume tout en retenue de Douglas Stuart, qui a pour effet d'accentuer l'extrême sensibilité des portraits, tisse un roman initiatique en huis clos poignant. Sans pour autant la justifier, Douglas Stuart explore les motifs de la violence des pères empêtrés dans leurs mensonges et tétanisés par les non-dits, tout en soulignant l'injustice qu'il y a pour les fils à subir leur tyrannie. Grand roman sur les rapports de pouvoir au sein des familles et sur l'incapacité à dire je t'aime, John, fils de John est un des plus beaux récits de filiation qui soient.",
+        couverture: johnFilsDeJohn,
+      },
     ],
   },
   {
@@ -246,21 +253,21 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "L'Homme de Kiev",
         auteur: "Bernard Malamud",
-        presentation: "Juif de naissance et de nationalité, libre-penseur, spinoziste amateur, le réparateur Yakov Bok quitte son shtetl de province pour la ville de Kiev. En 1911, l'autocratie tsariste fragilisée fait régner un antisémitisme d'État, brandissant le pogrom comme exutoire à la frustration nationale.",
+        presentation: "« C'est-à-dire que j'ai décidé d'agir en optimiste le jour où je me suis aperçu que le pessimisme m'empêchait d'agir. » À l'instar d'Albert Camus, Bernard Malamud imagine un héros révolté face à l'absurdité de la condition humaine. Résistance passive se traduisant par le simple fait d'exister. Lauréat du prix Pulitzer 1967 et du National Book Award, L'Homme de Kiev est un plaidoyer humaniste, un monument de la littérature américaine par l'un de ses maîtres.",
         couverture: bernardMalamudKiev,
         lien: "https://www.booksnjoy.com/homme-kiev-bernard-malamud-prix-pulitzer-1967/",
       },
       {
         titre: "Une éducation",
         auteur: "Tara Westover",
-        presentation: "À l'écriture de ses mémoires, il y a peu de chances que Tara Westover ait mesuré la pleine portée de son geste. Sous la forme d'une quête d'émancipation féminine douloureuse, elle fait le cadeau précieux d'un récit d'autodétermination lumineux.",
+        presentation: "À l'écriture de ses mémoires, il y a peu de chances que Tara Westover ait mesuré la pleine portée de son geste. Sous la forme d'une quête d'émancipation féminine douloureuse, elle nous fait le cadeau précieux d'un récit d'autodétermination lumineux. Tara Westover reprend possession de son histoire et rétablit une vérité dont les siens l'ont fait douter, à savoir grandir aux confins de l'Amérique rurale dans une famille mormone délirante aux fondations mouvantes, reposant sur une conception complètement pervertie de la loyauté.",
         couverture: uneEducation,
         lien: "https://www.booksnjoy.com/une-education-tara-westover-recit-emancipation-femme/",
       },
       {
         titre: "Une vie bouleversée",
         auteur: "Etty Hillesum",
-        presentation: "À seulement 27 ans, Etty Hillesum fait preuve d'une lucidité et d'une honnêteté éblouissantes vis-à-vis d'elle-même. Ses questionnements existentiels, qu'elle donne l'impression d'avoir jetés sur le papier au fil de sa pensée, sont d'une intelligence rare.",
+        presentation: "À seulement 27 ans, Etty Hillesum fait preuve d'une lucidité et d'une honnêteté éblouissantes vis-à-vis d'elle-même. Ses questionnements existentiels, qu'elle donne l'impression d'avoir jetés sur le papier au fil de sa pensée, sont d'une intelligence rare. Etty vit par ses écrits. Lire aujourd'hui sa quête initiatique, c'est encore la plus belle manière de reconnaître la valeur de son héritage, de lui rendre hommage en participant au devoir de mémoire. Continuer de transmettre, lire et faire lire ce document autobiographique relatant le processus de maturation d'une jeune femme de 27 ans est un acte de résistance visant à ne pas oublier ce qu'il s'est passé et à tirer des enseignements pour que l'histoire cesse de se répéter.",
         couverture: vieBouleversee,
         lien: "https://www.booksnjoy.com/une-vie-bouleversee-etty-hillesum-mon-livre-favori-chefdoeuvre/",
       },
@@ -281,7 +288,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Corps et âme",
         auteur: "Frank Conroy",
-        presentation: "Un enfant prodige de la musique, et la question de ce qu'un don précoce fait à une vie entière.",
+        presentation: "New York, années quarante. À six ans, Claude Rawlings vit avec sa mère dans un appartement en sous-sol, où, du soupirail, il observe le ballet des passants. Le rythme de leur pas dessinant les contours d'une mélodie dans son esprit. Brassant une galerie de personnages chaleureux et mystérieux, Frank Conroy nous embarque pour une traversée des apparences, de Brooklyn à la 5e Avenue, embrassant le destin exceptionnel d'un prodige de la musique. Corps et âme est un roman d'apprentissage bouleversant dans sa retranscription douloureuse de la fin de l'enfance et du temps de l'innocence.",
         couverture: corpsEtAme,
         lien: "https://www.booksnjoy.com/corps-et-ame-frank-conroy-lenfant-prodige-musique-don/",
       },
@@ -371,7 +378,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Poussière dans le vent",
         auteur: "Leonardo Padura",
-        presentation: "« Chaque action provoque une réaction. Nous sommes le résultat d'un grand désordre. Nous vivons sur un manège qui ne s'arrête pas et qui, avec sa force centrifuge, essaie toujours de nous expulser vers l'espace. Tu as beau courir, ton passé peut toujours te rattraper. »",
+        presentation: "Suivant une boucle temporelle se refermant sur l'élucidation d'une affaire sordide à l'origine de la dispersion d'un groupe d'amis, Leonardo Padura sonde avec émotion l'ambivalence des sentiments ressentis par tout exilé ayant rêvé un jour de faire table rase du passé, et avec lui de ce qu'il a été. Peut-on couper avec ses racines si facilement ? Ou notre identité, composée de différentes strates du temps et de demi-vérités, nous échappe-t-elle inexorablement ? Une fresque politique et une quête identitaire brillamment orchestrée autour de cette interrogation : « Qu'est-ce qui nous est arrivé ? »",
         couverture: poussiereVent,
         lien: "https://www.booksnjoy.com/poussiere-dans-vent-leonardo-padura-diaspora-cubaine-exil-amis/",
       },
@@ -550,6 +557,7 @@ export const thematiques: ThematiqueLecture[] = [
         auteur: "Toby Lloyd",
         presentation: "Entrée magistrale en littérature pour Toby Lloyd, qui signe avec La famille Rosenthal un premier roman à suspense brillant, mêlant mysticisme juif, magie noire, traumatismes intergénérationnels liés à la Shoah et névroses familiales.",
         couverture: familleRosenthal,
+        lien: "https://www.instagram.com/p/DZmGhQfMJtM/",
       },
       {
         titre: "Où vivaient les gens heureux",
@@ -568,7 +576,7 @@ export const thematiques: ThematiqueLecture[] = [
       {
         titre: "Une éducation",
         auteur: "Tara Westover",
-        presentation: "À l'écriture de ses mémoires, il y a peu de chances que Tara Westover ait mesuré la pleine portée de son geste. Sous la forme d'une quête d'émancipation féminine douloureuse, elle fait le cadeau précieux d'un récit d'autodétermination lumineux.",
+        presentation: "À l'écriture de ses mémoires, il y a peu de chances que Tara Westover ait mesuré la pleine portée de son geste. Sous la forme d'une quête d'émancipation féminine douloureuse, elle nous fait le cadeau précieux d'un récit d'autodétermination lumineux. Tara Westover reprend possession de son histoire et rétablit une vérité dont les siens l'ont fait douter, à savoir grandir aux confins de l'Amérique rurale dans une famille mormone délirante aux fondations mouvantes, reposant sur une conception complètement pervertie de la loyauté.",
         couverture: uneEducation,
         lien: "https://www.booksnjoy.com/une-education-tara-westover-recit-emancipation-femme/",
       },
