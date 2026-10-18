@@ -170,6 +170,11 @@ import { influences } from '../data/influences';
     overflow: hidden;
     background: var(--color-card-bg);
     box-shadow: 0 10px 24px rgba(41, 38, 36, 0.16);
+    transition: transform 0.2s ease;
+  }
+
+  .influences__card:hover .influences__cover {
+    transform: translateY(-3px);
   }
 
   .influences__cover :global(img) {
